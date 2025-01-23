@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+import type { Project } from '../../../types'; 
+
+const dummyProject = {
+  title: 'Project title',
+  description: 'Project desc'
+} as Project
+---
+
+<Layout>
+  <Nav />
+  <ProjectCard project={dummyProject}/>
+  <Footer />
+</Layout>
+
+<style>
+
+</style>
