@@ -1,16 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-
-import type { Project } from '../../types'; 
+import Link from '../components/Link.astro';
 
 ---
 
-<Layout>
-  <Nav />
+<Layout title="About Me">
   about
-  <Footer />
+  <section class="container about" aria-label="About studio"></section>
+  <img src="" alt="">
+  <div>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, accusamus excepturi itaque nemo maxime expedita, obcaecati facilis eius nam nihil aperiam rerum minus. Quas iusto aliquid fuga consequatur asperiores voluptatum.
+  </div>
+  <Link href="aaa" style="primary" text="Contact Me"/>
 </Layout>
 
 <style>
