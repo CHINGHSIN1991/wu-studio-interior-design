@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -12,9 +12,29 @@ const dummyProject = {
 } as Project
 ---
 
-<Layout title="Projects">
+<MainLayout title="Projects">
   <ProjectCard project={dummyProject}/>
-</Layout>
+  <ui>
+    <li>
+      <a href="./project-1/">Project 1</a>
+    </li>
+    <li>
+      <a href="./project-2/">Project 2</a>
+    </li>
+    <li>
+      <a href="./project-3/">Project 3</a>
+    </li>
+    <li>
+      <a href="./project-4/">Project 4</a>
+    </li>
+    <li>
+      <a href="./project-5/">Project 5</a>
+    </li>
+    <li>
+      <a href="./project-6/">Project 6</a>
+    </li>
+  </ui>
+</MainLayout>
 
 <style>
 
