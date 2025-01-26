@@ -1,11 +1,9 @@
 ---
 // component import
+import PostHeader from "../components/PostHeader.astro";
 import MainLayout from "./MainLayout.astro";
 
 // utils imports
-import { slugify, formatDate } from "../ts/utils"
-
-
 const { frontmatter } = Astro.props
 
 const {
@@ -19,17 +17,10 @@ const {
 ---
 
 <MainLayout {title} {description}>
-  <header>
-    <div class="container">
-      <small>
-        <a href={`/category/${slugify(category)}`} class="badge">{category}</a>
-      </small>
-      <h1 class="h2">{title}</h1>
-      <p>by <a href={`/author/${slugify(author)}`}>{author}</a> · {formatDate(date)}</p>
-    </div>
-    <img src="" alt="">
-  </header>
-  <div class="post-content">
+  <PostHeader
+    {title} {description} {date} {category} {image} {author}
+  />
+  <div class="project-content">
     <div class="content">
       <slot />
     </div>
