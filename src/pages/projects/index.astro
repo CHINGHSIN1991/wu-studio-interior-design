@@ -1,39 +1,22 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
 
-import type { Project } from '../../../types'; 
+const allProjects = await Astro.glob("./*.md")
 
-const dummyProject = {
-  title: 'Project title',
-  description: 'Project desc'
-} as Project
 ---
 
 <MainLayout title="Projects">
-  <ProjectCard project={dummyProject}/>
-  <ui>
-    <li>
-      <a href="./project-1/">Project 1</a>
-    </li>
-    <li>
-      <a href="./project-2/">Project 2</a>
-    </li>
-    <li>
-      <a href="./project-3/">Project 3</a>
-    </li>
-    <li>
-      <a href="./project-4/">Project 4</a>
-    </li>
-    <li>
-      <a href="./project-5/">Project 5</a>
-    </li>
-    <li>
-      <a href="./project-6/">Project 6</a>
-    </li>
-  </ui>
+  <section class="container" aria-label="new project posts">
+    <h1 class="h1">Projects</h1>
+    <div class="post-container">
+      {
+        allProjects.map(
+          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+        )
+      }
+    </div>    
+  </section>
 </MainLayout>
 
 <style>

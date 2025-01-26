@@ -1,13 +1,31 @@
 ---
 import type { Project } from "../../types";
+import { Image } from "astro:assets"
+import Link from "./Link.astro";
+import { slugify, formatDate } from "../ts/utils"
 
-const { project } = Astro.props
+const { frontmatter, url} = Astro.props
 ---
 
-<div id="container">
-	<div>{project.title}</div>
-  <div>{project.description}</div>
-</div>
+<article class="card">
+  <small>
+    <a href={`/category/${slugify(frontmatter.category)}`} class="badge">{frontmatter.category}</a>
+  </small>
+  <a href={url}>
+    <Image
+      src={frontmatter.image.src}
+      alt={frontmatter.image.alt}
+      width="400"
+      height="250"
+      format="avif"
+      fit="cover"
+      quality={80}
+    />
+    <h3 class="h2">{frontmatter.title}</h3>
+    <p>by <a href={`/author/${slugify(frontmatter.author)}`}>{frontmatter.author}</a> · {formatDate(frontmatter.date)}</p>
+  </a>
+  <Link href={url} text="Read more ..." style="secondary"/>
+</article>
 
 <style>
 
