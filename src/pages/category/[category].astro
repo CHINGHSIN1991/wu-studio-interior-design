@@ -1,0 +1,49 @@
+---
+import type { Project } from '../../../types';
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+import { slugify, formatProjectPost } from '../../ts/utils';
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { category: slugify("Reference Docs") },
+      props: { name: "Reference Docs" },
+    },
+    {
+      params: { category: slugify("General") },
+      props: { name: "General" },
+    },
+    {
+      params: { category: slugify("CSS") },
+      props: { name: "CSS" },
+    },
+    {
+      params: { category: slugify("Astro") },
+      props: { name: "Astro" },
+    }
+  ]
+}
+
+const { category } = Astro.params;
+const { name } = Astro.props
+
+const allProjects = await Astro.glob("../projects/*.md") as Project[];
+const formattedPosts = formatProjectPost(allProjects);
+const catPosts = formattedPosts.filter((post) => slugify(post.frontmatter.category) === category);
+
+---
+
+<MainLayout title={name}>
+  <section class="container" aria-label={`Posts about ${name}`}>
+    <h1 class="h1">Posts about {name}</h1>
+    <div class="post-container">
+      {
+        catPosts.map(
+          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+        )
+      }
+    </div>
+  </section>
+</MainLayout>
