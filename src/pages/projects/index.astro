@@ -2,7 +2,9 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 
-const allProjects = await Astro.glob("./*.md")
+import { formatProjectPost } from '../../ts/utils';
+const allProjects = await Astro.glob("./*.md");
+const formattedPosts = formatProjectPost(allProjects);
 
 ---
 
@@ -11,7 +13,7 @@ const allProjects = await Astro.glob("./*.md")
     <h1 class="h1">Projects</h1>
     <div class="post-container">
       {
-        allProjects.map(
+        formattedPosts.map(
           (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
         )
       }
