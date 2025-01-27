@@ -1,0 +1,45 @@
+---
+import type { Project } from '../../../types';
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+import { slugify, formatProjectPost } from '../../ts/utils';
+
+export async function getStaticPaths() {
+  const allProjects = await Astro.glob("../projects/*.md") as Project[];
+  const formattedPosts = formatProjectPost(allProjects);
+  const allAuthors = [...new Set(
+    formattedPosts.map((post) => post.frontmatter.author).flat()
+  )]
+  return allAuthors.map((author) => {
+    const authorPosts = formattedPosts.filter((post) => post.frontmatter.author === author);
+    return {
+      params: { author: slugify(author)},
+      props: {
+        authorName: author,
+        posts: authorPosts
+      }
+    }
+  })
+}
+
+const { author } = Astro.params;
+const { posts, authorName } = Astro.props
+
+
+
+
+---
+
+<MainLayout title={authorName}>
+  <section class="container" aria-label={`Posts about ${authorName}`}>
+    <h1 class="h1">Posts by {authorName}</h1>
+    <div class="post-container">
+      {
+        posts.map(
+          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+        )
+      }
+    </div>
+  </section>
+</MainLayout>
