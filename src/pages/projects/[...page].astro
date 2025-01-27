@@ -1,0 +1,43 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Pagination from '../../components/Pagination.astro';
+
+import { formatProjectPost } from '../../ts/utils';
+import CategoryCloud from '../../components/CategoryCloud.astro';
+
+export async function getStaticPaths({ paginate }) {
+  const allProjects = await Astro.glob("./*.md");
+  const formattedPosts = formatProjectPost(allProjects);
+
+  return paginate(formattedPosts, {
+    pageSize: 3,
+  })
+}
+
+const { page } = Astro.props as any;
+console.log(page)
+
+---
+
+<MainLayout title="Projects">
+  <section class="container" aria-label="new project posts">
+    <h1 class="h1">Projects</h1>
+    <div class="post-container">
+      {
+        page.data.map(
+          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+        )
+      }
+    </div>
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
+  <aside class="container" aria-label="Blog categories">
+    <h2>Blog Categories</h2>
+    <!-- TODO <CategoryCloud /> -->
+  </aside>
+</MainLayout>
+
+<style>
+
+</style>
