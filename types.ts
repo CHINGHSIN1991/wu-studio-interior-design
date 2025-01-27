@@ -18,7 +18,7 @@ export interface ProjectFrontmatter {
 export interface Project {
   frontmatter: ProjectFrontmatter;
   url: string;
-  content: string;
+  content?: string;
 }
 
 export interface Temp {
