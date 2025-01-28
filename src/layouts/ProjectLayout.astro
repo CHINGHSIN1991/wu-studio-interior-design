@@ -2,6 +2,7 @@
 // component import
 import PostHeader from "../components/PostHeader.astro";
 import MainLayout from "./MainLayout.astro";
+import CategoryCloud from "../components/CategoryCloud.astro";
 
 // utils imports
 const { frontmatter } = Astro.props
@@ -24,6 +25,11 @@ const {
     <div class="content">
       <slot />
     </div>
-    <div class="sidebar"></div>
+    <div class="sidebar">
+      <aside class="container" aria-label="Blog categories">
+        <h2>Blog Categories</h2>
+        <CategoryCloud />
+      </aside>
+    </div>
   </div>
 </MainLayout>

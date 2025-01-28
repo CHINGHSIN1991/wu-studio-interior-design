@@ -16,7 +16,6 @@ export async function getStaticPaths({ paginate }) {
 }
 
 const { page } = Astro.props as any;
-console.log(page)
 
 ---
 
@@ -34,7 +33,7 @@ console.log(page)
   </section>
   <aside class="container" aria-label="Blog categories">
     <h2>Blog Categories</h2>
-    <!-- TODO <CategoryCloud /> -->
+    <CategoryCloud showCount />
   </aside>
 </MainLayout>
 
