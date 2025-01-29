@@ -1,11 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
-import icon from 'astro-icon';
-
-import sitemap from '@astrojs/sitemap';
+import UnoCSS from 'unocss/astro'
+import icon from 'astro-icon'
+import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon(), sitemap()]
-});
+  integrations: [
+    UnoCSS({
+      injectReset: true, // or a path to the reset file
+    }),
+    icon(),
+    sitemap(),
+  ],
+})
