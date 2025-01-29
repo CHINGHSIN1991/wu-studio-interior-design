@@ -2,15 +2,40 @@
 import type { Project } from '../../../types';
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import NoResultBlock from '../../components/NoResultBlock.astro';
 
 import { slugify, formatProjectPost } from '../../ts/utils';
 
 export async function getStaticPaths() {
   const allProjects = await Astro.glob("../projects/*.md") as Project[];
+  
+  // 如果沒有找到任何項目，返回一個空陣列或預設路徑
+  if (!allProjects || allProjects.length === 0) {
+    return [{
+      params: { author: 'no-projects' },
+      props: {
+        authorName: 'No Projects',
+        posts: []
+      }
+    }];
+  }
+
   const formattedPosts = formatProjectPost(allProjects);
   const allAuthors = [...new Set(
     formattedPosts.map((post) => post.frontmatter.author).flat()
   )]
+  
+  // 如果沒有作者，返回預設路徑
+  if (!allAuthors || allAuthors.length === 0) {
+    return [{
+      params: { author: 'no-authors' },
+      props: {
+        authorName: 'No Authors',
+        posts: []
+      }
+    }];
+  }
+
   return allAuthors.map((author) => {
     const authorPosts = formattedPosts.filter((post) => post.frontmatter.author === author);
     return {
@@ -34,12 +59,16 @@ const { posts, authorName } = Astro.props
 <MainLayout title={authorName}>
   <section class="container" aria-label={`Posts about ${authorName}`}>
     <h1 class="h1">Posts by {authorName}</h1>
-    <div class="post-container">
-      {
-        posts.map(
-          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
-        )
-      }
-    </div>
+    {posts.length === 0 ? (
+      <NoResultBlock />
+    ) : (
+      <div class="post-container">
+        {
+          posts.map(
+            (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+          )
+        }
+      </div>
+    )}
   </section>
 </MainLayout>

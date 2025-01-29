@@ -2,10 +2,21 @@
 import type { Project } from '../../../types';
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import NoResultBlock from '../../components/NoResultBlock.astro';
 
 import { slugify, formatProjectPost } from '../../ts/utils';
 
 export async function getStaticPaths() {
+  const allProjects = await Astro.glob("../projects/*.md") as Project[];
+  
+  // if there's no result return default msg
+  if (!allProjects || allProjects.length === 0) {
+    return [{
+      params: { category: 'no-content' },
+      props: { name: 'No content' },
+    }];
+  }
+
   return [
     {
       params: { category: slugify("Reference Docs") },
@@ -38,12 +49,16 @@ const catPosts = formattedPosts.filter((post) => slugify(post.frontmatter.catego
 <MainLayout title={name}>
   <section class="container" aria-label={`Posts about ${name}`}>
     <h1 class="h1">Posts about {name}</h1>
-    <div class="post-container">
-      {
-        catPosts.map(
-          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
-        )
-      }
-    </div>
+    {catPosts.length === 0 ? (
+      <NoResultBlock />
+    ) : (
+      <div class="post-container">
+        {
+          catPosts.map(
+            (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+          )
+        }
+      </div>
+    )}
   </section>
 </MainLayout>
