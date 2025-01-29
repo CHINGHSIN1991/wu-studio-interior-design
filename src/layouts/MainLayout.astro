@@ -7,11 +7,14 @@ import Footer from "../components/Footer.astro"
 const {
   title = "My Astro Blog",
   description = "My musings about the Astro framework",
+	image,
+	frontmatter,
+	robots
 } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
-	<MainHead {title} {description} />
+	<MainHead {title} {description} {image} {frontmatter} {robots}/>
 	<body>
 		<Nav />
 		<main>
