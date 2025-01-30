@@ -13,7 +13,8 @@
     "@astrojs/sitemap": "^3.2.1",
     "@iconify-json/line-md": "^1.2.5",
     "astro": "^5.1.7",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "decap-cms-app": "^3.5.0"
   },
   "devDependencies": {
     "@unocss/reset": "^65.4.3",
