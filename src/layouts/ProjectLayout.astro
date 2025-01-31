@@ -1,4 +1,5 @@
 ---
+import type { Project } from "../../types";
 // component import
 import PostHeader from "../components/PostHeader.astro";
 import MainLayout from "./MainLayout.astro";
@@ -9,7 +10,7 @@ import RelatedPosts from "../components/RelatedPosts.astro";
 import { formatProjectPost } from "../ts/utils";
 
 
-const allProjects = await Astro.glob("../pages/projects/*.md");
+const allProjects = await Astro.glob("../pages/projects/*.md") as Project[];
 const formattedPosts = formatProjectPost(allProjects, {
   sortByDate: false
 });

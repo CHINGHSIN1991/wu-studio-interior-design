@@ -1,4 +1,5 @@
 ---
+import type { Project } from '../../../types';
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import Pagination from '../../components/Pagination.astro';
@@ -6,8 +7,8 @@ import Pagination from '../../components/Pagination.astro';
 import { formatProjectPost } from '../../ts/utils';
 import CategoryCloud from '../../components/CategoryCloud.astro';
 
-export async function getStaticPaths({ paginate }) {
-  const allProjects = await Astro.glob("./*.md");
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const allProjects = await Astro.glob("./*.md") as Project[];
   const formattedPosts = formatProjectPost(allProjects);
 
   return paginate(formattedPosts, {
@@ -25,7 +26,7 @@ const { page } = Astro.props as any;
     <div class="post-container">
       {
         page.data.map(
-          (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+          (project: Project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
         )
       }
     </div>

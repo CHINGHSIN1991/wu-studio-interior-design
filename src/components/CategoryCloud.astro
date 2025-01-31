@@ -1,7 +1,8 @@
 ---
+import type { Project } from "../../types";
 import { formatProjectPost, slugify } from "../ts/utils";
 
-const allPosts = await Astro.glob("../pages/projects/*.md");
+const allPosts = await Astro.glob("../pages/projects/*.md") as Project[];
 const formattedPosts = formatProjectPost(allPosts);
 const allCategories = formattedPosts.map((cat) => cat.frontmatter.category.toLowerCase()).flat()
 
