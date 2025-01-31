@@ -1,7 +1,12 @@
 import type { Project } from "../../types";
 
+export function invalidResult(): never {
+  throw new Error('Invalid result')
+}
+
 export function slugify(text: string) {
-  return text
+  if (text) {
+    return text
     .toString()
     .toLowerCase()
     .replace(/\s+/g, '-')
@@ -9,6 +14,9 @@ export function slugify(text: string) {
     .replace(/--+/g, '-')
     .replace(/^-+/, '')
     .replace(/-+$/, '');
+  } else {
+    return invalidResult()
+  }
 }
 
 export function formatDate(date: Date) {
