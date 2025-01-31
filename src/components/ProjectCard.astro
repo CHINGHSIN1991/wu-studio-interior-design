@@ -13,15 +13,15 @@ const { frontmatter, url} = Astro.props
   </small>
   <a href={url}>
     <Image
-      src={frontmatter.image.src}
-      alt={frontmatter.image.alt}
+      src={frontmatter.cover.src}
+      alt={frontmatter.cover.alt}
       width="400"
       height="250"
       format="avif"
       fit="cover"
       quality={80}
     />
-    <h3 class="h2">{frontmatter.title}</h3>
+    <h3 class="my-1 py-2 text-2xl font-bold">{frontmatter.title}</h3>
     <p>by <a href={`/designer/${slugify(frontmatter.designer)}`}>{frontmatter.designer}</a> · {formatDate(frontmatter.date)}</p>
   </a>
   <Link href={url} text="Read more ..." style="secondary"/>

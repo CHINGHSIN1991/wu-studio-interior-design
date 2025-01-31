@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets"
 import { slugify, formatDate } from "../ts/utils"
-const { category, title, author, date, image} = Astro.props
+const { category, title, designer, date, cover} = Astro.props
 ---
 
 <header>
@@ -10,11 +10,11 @@ const { category, title, author, date, image} = Astro.props
       <a href={`/category/${slugify(category)}`} class="badge">{category}</a>
     </small>
     <h1 class="h2">{title}</h1>
-    <p>by <a href={`/author/${slugify(author)}`}>{author}</a> · {formatDate(date)}</p>
+    <p>by <a href={`/designer/${slugify(designer)}`}>{designer}</a> · {formatDate(date)}</p>
   </div>
   <Image
-    src={image.src}
-    alt={image.alt}
+    src={cover.src}
+    alt={cover.alt}
     width="1200"
     height="600"
     format="avif"

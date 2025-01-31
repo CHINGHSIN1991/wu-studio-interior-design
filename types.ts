@@ -6,7 +6,7 @@ export interface ProjectFrontmatter {
   title: string;
   date: string;
   designer: string;
-  image: {
+  cover: {
     src: string;
     alt: string;
   };

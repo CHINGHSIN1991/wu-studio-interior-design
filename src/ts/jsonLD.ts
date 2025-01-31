@@ -19,7 +19,7 @@ export default function jsonLDGenerator({ type, post, url }: PostParam) {
         },
         "headline": "${post.title}",
         "description": "${post.description}",
-        "image": "${post.image.src}",
+        "cover": "${post.cover.src}",
         "designer": {
           "@type": "Person",
           "name": "${post.designer}",
