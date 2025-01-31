@@ -19,7 +19,7 @@ export async function GET(context) {
       // Compute RSS link from post `id`
       // This example assumes all posts are rendered as `/blog/[id]` routes
       // link: `/projects/${post.id}/`,
-      customData: `<author>${post.frontmatter.author}</author>`,
+      customData: `<designer>${post.frontmatter.designer}</designer>`,
     })),
   })
 }

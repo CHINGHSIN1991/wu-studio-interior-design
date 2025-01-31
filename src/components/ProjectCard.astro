@@ -22,7 +22,7 @@ const { frontmatter, url} = Astro.props
       quality={80}
     />
     <h3 class="h2">{frontmatter.title}</h3>
-    <p>by <a href={`/author/${slugify(frontmatter.author)}`}>{frontmatter.author}</a> · {formatDate(frontmatter.date)}</p>
+    <p>by <a href={`/designer/${slugify(frontmatter.designer)}`}>{frontmatter.designer}</a> · {formatDate(frontmatter.date)}</p>
   </a>
   <Link href={url} text="Read more ..." style="secondary"/>
 </article>

@@ -5,7 +5,7 @@ export interface ProjectFrontmatter {
   layout: string;
   title: string;
   date: string;
-  author: string;
+  designer: string;
   image: {
     src: string;
     alt: string;

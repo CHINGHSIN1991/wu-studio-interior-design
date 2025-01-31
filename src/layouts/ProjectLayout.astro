@@ -21,7 +21,7 @@ const {
   description,
   date,
   category,
-  author,
+  designer,
   image,
 } = frontmatter
 
@@ -32,7 +32,7 @@ const relatedPosts = formattedPosts.filter(
 
 <MainLayout {title} {description} image={frontmatter.image} {frontmatter} robots={frontmatter.robots}>
   <PostHeader
-    {title} {description} {date} {category} {image} {author}
+    {title} {description} {date} {category} {image} {designer}
   />
   <div class="project-content">
     <div class="content">

@@ -145,7 +145,7 @@ This file is in BETA. Please test and contribute to the discussion:
               </h3>
               <p>
                 by
-                <xsl:value-of select="author" />
+                <xsl:value-of select="designer" />
               </p>
               <p>
                 <xsl:value-of select="description" />
