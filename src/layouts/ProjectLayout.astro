@@ -1,5 +1,7 @@
 ---
-import type { Project } from "../../types";
+import { Image } from "astro:assets";
+
+import type { Project, ProjectFrontmatter } from "../../types";
 // component import
 import PostHeader from "../components/PostHeader.astro";
 import MainLayout from "./MainLayout.astro";
@@ -24,7 +26,8 @@ const {
   category,
   designer,
   cover,
-} = frontmatter
+  images,
+} = frontmatter as ProjectFrontmatter
 
 const relatedPosts = formattedPosts.filter(
   (post) => post.frontmatter.category.toLowerCase() === category.toLowerCase() && post.frontmatter.title !== title
@@ -36,6 +39,20 @@ const relatedPosts = formattedPosts.filter(
     {title} {description} {date} {category} {cover} {designer}
   />
   <div class="project-content">
+    <div class="content">
+      {
+        images?.map((img) => (<Image
+          src={img.src}
+          alt={img.alt}
+          width="400"
+          height="600"
+          format="avif"
+          loading="lazy"
+          fit="cover"
+          quality={80}
+        />))
+      }
+    </div>
     <div class="content">
       <slot />
     </div>

@@ -1,15 +1,17 @@
 export type ProjectCategory = 'home' | 'business'
 export type MeasureUnit = 'm' | 'tp'
+export interface Img {
+  src: string;
+  alt: string;
+}
 
 export interface ProjectFrontmatter {
   layout: string;
   title: string;
   date: string;
   designer: string;
-  cover: {
-    src: string;
-    alt: string;
-  };
+  cover: Img;
+  images: Img[];
   description: string;
   draft: boolean;
   category: string;
