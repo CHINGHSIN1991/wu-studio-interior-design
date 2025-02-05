@@ -1,10 +1,20 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import Carousel from '../components/Carousel.astro';
 
+// 獲取輪播圖數據
+const carouselItems = await Astro.glob('../content/carousel/*.md');
+const activeItems = carouselItems
+  .filter(item => item.frontmatter.active)
+  .sort((a, b) => a.frontmatter.order - b.frontmatter.order);
+
+console.log('Active carousel items:', activeItems); // 添加除錯信息
 ---
 
 <MainLayout>
-  index
+  <Carousel items={activeItems} />
+  
+  <!-- 其他內容 -->
 </MainLayout>
 
 <style>

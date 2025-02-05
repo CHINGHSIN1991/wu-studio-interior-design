@@ -1,0 +1,161 @@
+---
+import { Image } from "astro:assets"
+interface CarouselItem {
+  frontmatter: {
+    title: string;
+    description: string;
+    image: string;
+    link?: string;
+    order: number;
+    active: boolean;
+  }
+}
+
+const { items } = Astro.props;
+console.log('Carousel items:', items);
+---
+
+<div class="carousel-container">
+  <div class="carousel">
+    {
+      items.map((item: CarouselItem, index: number) => {
+        console.log('Image path:', item.frontmatter.image);
+        return (
+          <div class="carousel-item" style={index === 0 ? "display: block;" : "display: none;"}>
+            {item.frontmatter.link ? (
+              <a href={`projects/${item.frontmatter.link}`}>
+                <Image
+                  src={item.frontmatter.image} 
+                  alt={item.frontmatter.title}
+                  width="1200"
+                  height="600"
+                  format="avif"
+                  fit="cover"
+                  quality={80}
+                  onError={(e) => console.log('Image failed to load:', e.target.src)}
+                />
+              </a>
+            ) : (
+              <Image
+                src={item.frontmatter.image} 
+                alt={item.frontmatter.title}
+                width="1200"
+                height="600"
+                format="avif"
+                fit="cover"
+                quality={80}
+                onError={(e) => console.log('Image failed to load:', e.target.src)}
+              />
+            )}
+            <div class="carousel-caption">
+              <h2>{item.frontmatter.title}</h2>
+              <p>{item.frontmatter.description}</p>
+            </div>
+          </div>
+        )
+      })
+    }
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+  </div>
+</div>
+
+<style>
+  .carousel-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+</style>
+
+<script>
+  function setupCarousel() {
+    const items = document.querySelectorAll('.carousel-item');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    let currentIndex = 0;
+
+    function showSlide(index: number) {
+      items.forEach((item) => (item as HTMLElement).style.display = 'none');
+      (items[index] as HTMLElement).style.display = 'block';
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % items.length;
+      showSlide(currentIndex);
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      showSlide(currentIndex);
+    }
+
+    // 自動輪播
+    let interval = setInterval(nextSlide, 5000);
+
+    // 滑鼠懸停時暫停輪播
+    const carousel = document.querySelector('.carousel');
+    carousel?.addEventListener('mouseenter', () => clearInterval(interval));
+    carousel?.addEventListener('mouseleave', () => {
+      interval = setInterval(nextSlide, 5000);
+    });
+
+    // 按鈕事件
+    prevBtn?.addEventListener('click', prevSlide);
+    nextBtn?.addEventListener('click', nextSlide);
+  }
+
+  // 等待 DOM 加載完成後初始化
+  document.addEventListener('astro:page-load', setupCarousel);
+</script> 
