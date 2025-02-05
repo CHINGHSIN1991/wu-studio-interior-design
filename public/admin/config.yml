@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
 
-media_folder: "src/assets" # Location where files will be stored in the repo
-public_folder: "/images" # The src attribute for uploaded media
+media_folder: "src/assets/images" # Location where files will be stored in the repo
+public_folder: "/assets/images" # The src attribute for uploaded media
 
 collections:
   - name: "projects" # 用於路由，例如 /admin/collections/projects
@@ -16,6 +16,25 @@ collections:
       - { label: "Description", name: "description", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Designer", name: "designer", widget: "string" }
       - { label: "Category", name: "category", widget: "select", options: ["Reference Docs", "General", "CSS", "Astro"] }
       - { label: "Body", name: "body", widget: "markdown" }
+  - name: "covers" # 用於路由，例如 /admin/collections/covers
+    label: "Cover" # 在 UI 中顯示的名稱
+    folder: "src/cover" # .md 文件存放的路徑
+    create: true # 允許用戶創建新文檔
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+  - name: "carousel" # 用於路由，例如 /admin/collections/carousel
+    label: "輪播圖" # 在 UI 中顯示的名稱
+    folder: "src/content/carousel" # .md 文件存放的路徑
+    create: true # 允許用戶創建新文檔
+    fields:
+      - { label: "標題", name: "title", widget: "string" }
+      - { label: "描述", name: "description", widget: "string" }
+      - { label: "輪播圖片", name: "image", widget: "image", required: true }
+      - { label: "連結", name: "link", widget: "string", required: false }
+      - { label: "排序", name: "order", widget: "number", default: 1 }
+      - { label: "啟用狀態", name: "active", widget: "boolean", default: true }
