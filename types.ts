@@ -15,6 +15,7 @@ export interface ProjectFrontmatter {
   description: string;
   draft: boolean;
   category: string;
+  projectImages: Img[];
 }
 
 export interface Project {

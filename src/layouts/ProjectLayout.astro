@@ -27,6 +27,7 @@ const {
   designer,
   cover,
   images,
+  projectImages,
 } = frontmatter as ProjectFrontmatter
 
 const relatedPosts = formattedPosts.filter(
@@ -72,3 +73,25 @@ const relatedPosts = formattedPosts.filter(
     </div>
   </div>
 </MainLayout>
+
+<div class="project-images">
+  {projectImages && projectImages.map((item) => (
+    <img src={item.image} alt="Project image" />
+  ))}
+</div>
+
+<style>
+  .project-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .project-images img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+</style>
