@@ -10,8 +10,8 @@ collections:
     label: "Projects"
     folder: "src/pages/projects"
     create: true
-    media_folder: "src/assets/images/projects/{{slug}}"
-    public_folder: "/assets/images/projects/{{slug}}"
+    media_folder: "src/assets/projects/{{slug}}"
+    public_folder: "/assets/projects/{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
       - { label: "Title", name: "title", widget: "string" }
@@ -33,8 +33,8 @@ collections:
     label: "輪播圖"
     folder: "src/content/carousel"
     create: true
-    media_folder: "src/assets/images/carousel"
-    public_folder: "/assets/images/carousel"
+    media_folder: "src/assets/carousel"
+    public_folder: "/assets/carousel"
     fields:
       - { label: "標題", name: "title", widget: "string" }
       - { label: "描述", name: "description", widget: "string" }
