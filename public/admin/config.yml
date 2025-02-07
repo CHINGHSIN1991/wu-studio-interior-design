@@ -12,6 +12,7 @@ collections:
     create: true
     media_folder: "src/assets/projects/{{slug}}"
     public_folder: "/assets/projects/{{slug}}"
+    publish: true # 允許發布/草稿狀態切換
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
       - { label: "Title", name: "title", widget: "string" }
@@ -28,6 +29,7 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Designer", name: "designer", widget: "string" }
       - { label: "Category", name: "category", widget: "select", options: ["Reference Docs", "General", "CSS", "Astro"] }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "carousel"
     label: "輪播圖"
@@ -35,6 +37,7 @@ collections:
     create: true
     media_folder: "src/assets/carousel"
     public_folder: "/assets/carousel"
+    publish: true
     fields:
       - { label: "標題", name: "title", widget: "string" }
       - { label: "描述", name: "description", widget: "string" }
@@ -42,3 +45,4 @@ collections:
       - { label: "連結", name: "link", widget: "string", required: false }
       - { label: "排序", name: "order", widget: "number", default: 1 }
       - { label: "啟用狀態", name: "active", widget: "boolean", default: true }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
