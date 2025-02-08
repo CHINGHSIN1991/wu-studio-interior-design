@@ -19,13 +19,13 @@ console.log('Carousel items:', items);
   <div class="carousel">
     {
       items.map((item: CarouselItem, index: number) => {
-        console.log('Image path:', item.frontmatter.image);
+        console.log('Current image path:', item.frontmatter.image);
         return (
           <div class="carousel-item" style={index === 0 ? "display: block;" : "display: none;"}>
             {item.frontmatter.link ? (
               <a href={`projects/${item.frontmatter.link}`}>
                 <Image
-                  src={item.frontmatter.image} 
+                  src={`/src${item.frontmatter.image}`} 
                   alt={item.frontmatter.title}
                   width="1200"
                   height="600"
@@ -37,7 +37,7 @@ console.log('Carousel items:', items);
               </a>
             ) : (
               <Image
-                src={item.frontmatter.image} 
+                src={`/src${item.frontmatter.image}`} 
                 alt={item.frontmatter.title}
                 width="1200"
                 height="600"
