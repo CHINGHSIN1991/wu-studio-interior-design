@@ -17,23 +17,25 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
-      - { label: "Cover Image", name: "image", widget: "image", required: true }
+      - {
+          label: "Cover Image",
+          name: "cover",
+          widget: "object",
+          fields: [
+            { label: "Image", name: "image", widget: "image", required: true },
+            { label: "Alt Text", name: "alt", widget: "string", required: true }
+          ]
+        }
       - { 
           label: "Project Images", 
           name: "projectImages", 
           widget: "list", 
-          summary: "{{fields.image}}", 
-          field: { label: "Image", name: "image", widget: "image" },
+          summary: "{{fields.image}} - {{fields.alt}}", 
+          fields: [
+            { label: "Image", name: "image", widget: "image" },
+            { label: "Alt Text", name: "alt", widget: "string" }
+          ],
           required: false
-        }
-      - { 
-          label: "Publish Date", 
-          name: "date", 
-          widget: "datetime",
-          date_format: "YYYY-MM-DD", # 日期格式
-          time_format: "HH:mm", # 時間格式
-          format: "YYYY-MM-DD HH:mm", # 儲存格式
-          default: "" # 預設為空，會在發布時自動填入當前時間
         }
       - { label: "Designer", name: "designer", widget: "string" }
       - { label: "Category", name: "category", widget: "select", options: ["Reference Docs", "General", "CSS", "Astro"] }
