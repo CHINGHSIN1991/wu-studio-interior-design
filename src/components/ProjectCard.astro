@@ -13,8 +13,8 @@ const { frontmatter, url} = Astro.props
   </small>
   <a href={url}>
     <Image
-      src={frontmatter.cover.src}
-      alt={frontmatter.cover.alt}
+      src={frontmatter.cover?.src ?? "/assets/images/fallback-image.png"}
+      alt={frontmatter.cover?.alt ?? "Project cover image"}
       width="400"
       height="250"
       format="avif"
