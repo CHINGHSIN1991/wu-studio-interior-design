@@ -3,7 +3,7 @@ backend:
   branch: main # Branch to update (optional; defaults to master)
 
 media_folder: "public/assets/images"
-public_folder: "assets/images"
+public_folder: "/assets/images"
 
 collections:
   - name: "projects"
@@ -12,6 +12,8 @@ collections:
     folder: "src/content/projects"
     create: true
     publish: true
+    media_folder: "public/assets/projects/{{slug}}"
+    public_folder: "/assets/projects/{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
       - { label: "Title", name: "title", widget: "string" }
@@ -46,6 +48,8 @@ collections:
     folder: "src/content/carousel"
     create: true
     publish: true
+    media_folder: "public/assets/carousel"
+    public_folder: "/assets/carousel"
     fields:
       - { label: "標題", name: "title", widget: "string" }
       - { label: "描述", name: "description", widget: "string" }
