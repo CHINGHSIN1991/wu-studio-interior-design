@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "body": "dsfasdf",
+  "layout": "../../layouts/ProjectLayout.astro",
+  "designer": "dsfasd",
+  "projectImages": [
+    {
+      "image": "assets/projects/dfasd/carbon-9-.png",
+      "alt": "dsfasdfasd"
+    },
+    {
+      "image": "assets/projects/dfasd/carbon-8-.png",
+      "alt": "dsfasdfasdf"
+    }
+  ],
+  "cover": {
+    "image": "assets/projects/dfasd/carbon-7-.png",
+    "alt": "fsadfasd"
+  },
+  "title": "dfasd",
+  "description": "fdsfasdf",
+  "category": "General"
+}
