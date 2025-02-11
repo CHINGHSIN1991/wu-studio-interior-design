@@ -11,8 +11,6 @@ collections:
     format: "json"
     folder: "src/content/projects"
     create: true
-    media_folder: "public/assets/projects/{{slug}}"
-    public_folder: "assets/projects/{{slug}}"
     publish: true
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
@@ -47,8 +45,6 @@ collections:
     format: "json"
     folder: "src/content/carousel"
     create: true
-    media_folder: "public/assets/carousel"
-    public_folder: "assets/carousel"
     publish: true
     fields:
       - { label: "標題", name: "title", widget: "string" }
