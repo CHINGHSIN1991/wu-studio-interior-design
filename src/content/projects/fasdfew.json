@@ -1,0 +1,23 @@
+{
+  "draft": false,
+  "body": "sdfasdf",
+  "layout": "../../layouts/ProjectLayout.astro",
+  "designer": "dfasdferw",
+  "projectImages": [
+    {
+      "image": "assets/projects/fasdfew/carbon-13-.png",
+      "alt": "dfasdfasdf"
+    },
+    {
+      "image": "assets/projects/fasdfew/carbon-13-.png",
+      "alt": "dsfasdf"
+    }
+  ],
+  "cover": {
+    "image": "assets/projects/fasdfew/s__616661010.jpg",
+    "alt": "fasdfa"
+  },
+  "title": "fasdfew",
+  "description": "ewrtwetew",
+  "category": "General"
+}
