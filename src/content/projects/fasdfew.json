@@ -1,23 +1,22 @@
 {
-  "draft": false,
-  "body": "sdfasdf",
-  "layout": "../../layouts/ProjectLayout.astro",
-  "designer": "dfasdferw",
+  "title": "df4ert",
+  "description": "rtwertw",
+  "cover": {
+    "image": "assets/projects/df4ert/carbon-3-.png",
+    "alt": "ertwert"
+  },
   "projectImages": [
     {
-      "image": "assets/projects/fasdfew/carbon-13-.png",
-      "alt": "dfasdfasdf"
+      "image": "assets/projects/df4ert/carbon-6-.png",
+      "alt": "rewtwerrwet"
     },
     {
-      "image": "assets/projects/fasdfew/carbon-13-.png",
-      "alt": "dsfasdf"
+      "image": "assets/projects/df4ert/carbon-2-.png",
+      "alt": "tertwert"
     }
   ],
-  "cover": {
-    "image": "assets/projects/fasdfew/s__616661010.jpg",
-    "alt": "fasdfa"
-  },
-  "title": "fasdfew",
-  "description": "ewrtwetew",
-  "category": "General"
+  "designer": "retwert",
+  "category": "General",
+  "body": "rtwertwert",
+  "draft": false
 }
