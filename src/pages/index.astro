@@ -18,7 +18,7 @@ console.log('Carousel items data:', carouselItems.map(item => item.data.title));
       <div>
         <h1>{item.data.title}</h1>
         <p>{item.data.description}</p>
-        <img src={`/src/content/carousel/public/${item.data.image}`} alt={item.data.title} />
+        <img src={item.data.image} alt={item.data.title} />
         {item.data.link && <a href={item.data.link}>了解更多</a>}
       </div>
     ))
