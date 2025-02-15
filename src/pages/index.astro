@@ -2,13 +2,13 @@
 import MainLayout from '../layouts/MainLayout.astro';
 // import Carousel from '../components/Carousel.astro';
 import { getCollection } from 'astro:content';
+import { getImagePath } from '../ts/utils';
 
 const carouselItems = await getCollection('carousel', ({ data }) => {
   return data.active && !data.draft;
 });
 
 console.log('Carousel items data:', carouselItems.map(item => item.data.title));
-
 
 ---
 
@@ -18,7 +18,7 @@ console.log('Carousel items data:', carouselItems.map(item => item.data.title));
       <div>
         <h1>{item.data.title}</h1>
         <p>{item.data.description}</p>
-        <img src={item.data.image} alt={item.data.title} />
+        <img src={getImagePath(item.data.image)} alt={item.data.title} />
         {item.data.link && <a href={item.data.link}>了解更多</a>}
       </div>
     ))
