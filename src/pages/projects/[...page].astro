@@ -1,17 +1,17 @@
 ---
 import type { Project } from '../../../types';
+import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import Pagination from '../../components/Pagination.astro';
-
-import { formatProjectPost } from '../../ts/utils';
 import CategoryCloud from '../../components/CategoryCloud.astro';
 
 export async function getStaticPaths({ paginate }: { paginate: any }) {
-  const allProjects = await Astro.glob("./*.md") as Project[];
-  const formattedPosts = formatProjectPost(allProjects);
+  const allProjects = await getCollection('projects', ({ data }) => {
+    return !data.draft;
+  });
 
-  return paginate(formattedPosts, {
+  return paginate(allProjects, {
     pageSize: 3,
   })
 }
@@ -26,15 +26,16 @@ const { page } = Astro.props as any;
     <div class="post-container">
       {
         page.data.map(
-          (project: Project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+          (project: Project) => <ProjectCard project={project}/>
         )
       }
     </div>
+    ------
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>
   <aside class="container" aria-label="Blog categories">
     <h2>Blog Categories</h2>
-    <CategoryCloud showCount />
+    <!-- <CategoryCloud showCount /> -->
   </aside>
 </MainLayout>
 

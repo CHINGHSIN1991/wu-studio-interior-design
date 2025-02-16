@@ -2,29 +2,29 @@
 import type { Project } from "../../types";
 import { Image } from "astro:assets"
 import Link from "./Link.astro";
-import { slugify, formatDate } from "../ts/utils"
+import { slugify, formatDate, getImagePath } from "../ts/utils"
 
-const { frontmatter, url} = Astro.props
+const { project} = Astro.props
 ---
 
 <article class="card">
   <small>
-    <a href={`/category/${slugify(frontmatter.category)}`} class="badge">{frontmatter.category}</a>
+    <a href={`/category/${slugify(project.data.category)}`} class="badge">{project.data.category}</a>
   </small>
-  <a href={url}>
+  <a href={project.data.title}>
     <Image
-      src={frontmatter.cover?.src ?? "/assets/images/fallback-image.png"}
-      alt={frontmatter.cover?.alt ?? "Project cover image"}
+      src={project.data.cover?.image ?? getImagePath("/assets/images/fallback-image.png")}
+      alt={project.data.cover?.alt ?? "Project cover image"}
       width="400"
       height="250"
       format="avif"
       fit="cover"
       quality={80}
     />
-    <h3 class="my-1 py-2 text-2xl font-bold">{frontmatter.title}</h3>
-    <p>by <a href={`/designer/${slugify(frontmatter.designer)}`}>{frontmatter.designer}</a> · {formatDate(frontmatter.date)}</p>
+    <h3 class="my-1 py-2 text-2xl font-bold">{project.data.title}</h3>
+    <p>by <a href={`/designer/${slugify(project.data.designer)}`}>{project.data.designer}</a> · {formatDate(project.data?.date)}</p>
   </a>
-  <Link href={url} text="Read more ..." style="secondary"/>
+  <Link href={project.data.url} text="Read more ..." style="secondary"/>
 </article>
 
 <style>
