@@ -1,7 +1,7 @@
 import rss from '@astrojs/rss'
 import { formatProjectPost } from '../ts/utils'
 
-const postImportResult = import.meta.glob('./projects/**/*.md', {
+const postImportResult = import.meta.glob('./content/projects/*.json', {
   eager: true,
 })
 const posts = formatProjectPost(Object.values(postImportResult))
