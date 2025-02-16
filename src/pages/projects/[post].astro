@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+  return allProjects.map(project => ({
+    params: { post: project.data.title },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+
+if (!project) {
+  return Astro.redirect('/404');
+}
+
+---
+
+<MainLayout title={project.data.title}>
+  <article class="container">
+    <h1>{project.data.title}</h1>
+    <p>{project.data.description}</p>
+    
+    {/* 顯示封面圖 */}
+    <img src={project.data.cover.image} alt={project.data.cover.alt} />
+    
+    {/* 顯示專案圖片集 */}
+    {project.data.projectImages && (
+      <div class="project-images">
+        {project.data.projectImages.map((img) => (
+          <img src={img.image} alt={img.alt} />
+        ))}
+      </div>
+    )}
+    
+    <div class="project-info">
+      <p>設計師：{project.data.designer}</p>
+      <p>分類：{project.data.category}</p>
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .project-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .project-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border-radius: 8px;
+  }
+</style>
