@@ -7,9 +7,6 @@ import { getImagePath } from '../ts/utils';
 const carouselItems = await getCollection('carousel', ({ data }) => {
   return data.active && !data.draft;
 });
-
-console.log('Carousel items data:', carouselItems.map(item => item.data.title));
-
 ---
 
 <MainLayout>
