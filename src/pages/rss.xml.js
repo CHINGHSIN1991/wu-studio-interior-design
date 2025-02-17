@@ -1,10 +1,11 @@
 import rss from '@astrojs/rss'
 import { formatProjectPost } from '../ts/utils'
 
-const postImportResult = import.meta.glob('./content/projects/*.json', {
+const postImportResult = import.meta.glob('../content/projects/*.json', {
   eager: true,
 })
-const posts = formatProjectPost(Object.values(postImportResult))
+
+const posts = Object.values(postImportResult)
 
 export async function GET(context) {
   return rss({
@@ -13,13 +14,10 @@ export async function GET(context) {
     description: 'Interior works',
     site: 'http://localhost:4321',
     items: posts.map((post) => ({
-      title: post.frontmatter.title,
-      pubDate: post.frontmatter.date,
-      description: post.frontmatter.description,
-      // Compute RSS link from post `id`
-      // This example assumes all posts are rendered as `/blog/[id]` routes
-      // link: `/projects/${post.id}/`,
-      customData: `<designer>${post.frontmatter.designer}</designer>`,
+      title: post.title,
+      pubDate: post.date ?? '2014/01/01',
+      description: post.description ?? 'unknown',
+      customData: `<designer>${post.designer}</designer>`,
     })),
   })
 }
