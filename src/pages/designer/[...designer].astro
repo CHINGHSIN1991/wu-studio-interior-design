@@ -1,15 +1,16 @@
 ---
-import type { Project } from '../../../types';
+import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import NoResultBlock from '../../components/NoResultBlock.astro';
 
-import { slugify, formatProjectPost } from '../../ts/utils';
+import { slugify } from '../../ts/utils';
 
 export async function getStaticPaths() {
-  const allProjects = await Astro.glob("../projects/*.md") as Project[];
-  
-  // 如果沒有找到任何項目，返回一個空陣列或預設路徑
+  const allProjects = await getCollection('projects', ({ data }) => {
+    return !data.draft;
+  });
+
   if (!allProjects || allProjects.length === 0) {
     return [{
       params: { designer: 'no-projects' },
@@ -20,9 +21,9 @@ export async function getStaticPaths() {
     }];
   }
 
-  const formattedPosts = formatProjectPost(allProjects);
+  // const formattedPosts = formatProjectPost(allProjects);
   const allDesigners = [...new Set(
-    formattedPosts.map((post) => post.frontmatter.designer).flat()
+    allProjects.map((post) => post.data.designer).flat()
   )]
   
   // 如果沒有作者，返回預設路徑
@@ -37,7 +38,7 @@ export async function getStaticPaths() {
   }
 
   return allDesigners.map((designer) => {
-    const designerPosts = formattedPosts.filter((post) => post.frontmatter.designer === designer);
+    const designerPosts = allProjects.filter((post) => post.data.designer === designer);
     return {
       params: { designer: slugify(designer)},
       props: {
@@ -48,7 +49,7 @@ export async function getStaticPaths() {
   })
 }
 
-const { designer } = Astro.params;
+// const { designer } = Astro.params;
 const { posts, designerName } = Astro.props
 
 
@@ -65,7 +66,7 @@ const { posts, designerName } = Astro.props
       <div class="post-container">
         {
           posts.map(
-            (project) => <ProjectCard frontmatter={project.frontmatter} url={project.url}/>
+            (project) => <ProjectCard project={project} />
           )
         }
       </div>
