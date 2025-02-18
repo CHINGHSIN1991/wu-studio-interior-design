@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../../types';
+import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import NoResultBlock from '../../components/NoResultBlock.astro';
@@ -7,7 +8,9 @@ import NoResultBlock from '../../components/NoResultBlock.astro';
 import { slugify, formatProjectPost } from '../../ts/utils';
 
 export async function getStaticPaths() {
-  const allProjects = await Astro.glob("../projects/*.md") as Project[];
+  const allProjects = await getCollection('projects', ({ data }) => {
+    return !data.draft;
+  });
   
   // if there's no result return default msg
   if (!allProjects || allProjects.length === 0) {

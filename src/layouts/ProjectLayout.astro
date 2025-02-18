@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
-
-import type { Project, ProjectFrontmatter } from "../../types";
+import { getCollection } from 'astro:content';
 // component import
 import PostHeader from "../components/PostHeader.astro";
 import MainLayout from "./MainLayout.astro";
@@ -9,16 +8,14 @@ import CategoryCloud from "../components/CategoryCloud.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
 
 // utils imports
-import { formatProjectPost } from "../ts/utils";
+import { getImagePath } from "../ts/utils";
 
-
-const allProjects = await Astro.glob("../pages/projects/*.md") as Project[];
-const formattedPosts = formatProjectPost(allProjects, {
-  sortByDate: false
+const allProjects = await getCollection('projects', ({ data }) => {
+  return !data.draft;
 });
 
 
-const { frontmatter } = Astro.props
+const { project } = Astro.props
 const {
   title, 
   description,
@@ -26,24 +23,23 @@ const {
   category,
   designer,
   cover,
-  images,
   projectImages,
-} = frontmatter as ProjectFrontmatter
+} = project.data
 
-const relatedPosts = formattedPosts.filter(
-  (post) => post.frontmatter.category.toLowerCase() === category.toLowerCase() && post.frontmatter.title !== title
+const relatedPosts = allProjects.filter(
+  (post) => post.data.category.toLowerCase() === category.toLowerCase() && post.data.title !== title
 ).slice(0,3)
 ---
 
-<MainLayout {title} {description} image={frontmatter.cover} {frontmatter} robots={frontmatter.robots}>
+<MainLayout {title} {description} image={cover}>
   <PostHeader
     {title} {description} {date} {category} {cover} {designer}
   />
   <div class="project-content">
     <div class="content">
       {
-        images?.map((img) => (<Image
-          src={img.src}
+        projectImages?.map((img) => {console.log(getImagePath(img.image));console.log(img);return (<Image
+          src={img.image}
           alt={img.alt}
           width="400"
           height="600"
@@ -51,7 +47,7 @@ const relatedPosts = formattedPosts.filter(
           loading="lazy"
           fit="cover"
           quality={80}
-        />))
+        />)})
       }
     </div>
     <div class="content">
@@ -66,7 +62,7 @@ const relatedPosts = formattedPosts.filter(
         relatedPosts.length > 0 && (
         <aside class="container" aria-label="Related posts">
           <h2>Related Posts</h2>
-          <RelatedPosts {relatedPosts} />
+          {/* <RelatedPosts {relatedPosts} /> */}
         </aside>
         )
       }

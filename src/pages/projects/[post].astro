@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import MainLayout from '../../layouts/MainLayout.astro';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
@@ -18,7 +18,7 @@ if (!project) {
 
 ---
 
-<MainLayout title={project.data.title}>
+<ProjectLayout project={project}>
   <article class="container">
     <h1>{project.data.title}</h1>
     <p>{project.data.description}</p>
@@ -40,7 +40,7 @@ if (!project) {
       <p>分類：{project.data.category}</p>
     </div>
   </article>
-</MainLayout>
+</ProjectLayout>
 
 <style>
   .container {

@@ -13,7 +13,7 @@ const { category, title, designer, date, cover} = Astro.props
     <p>by <a href={`/designer/${slugify(designer)}`}>{designer}</a> · {formatDate(date)}</p>
   </div>
   <Image
-    src={cover.src}
+    src={cover.image}
     alt={cover.alt}
     width="1200"
     height="600"
