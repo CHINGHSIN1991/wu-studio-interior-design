@@ -12,14 +12,12 @@ interface CarouselItem {
 }
 
 const { items } = Astro.props;
-console.log('Carousel items:', items);
 ---
 
 <div class="carousel-container">
   <div class="carousel">
     {
       items.map((item: CarouselItem, index: number) => {
-        console.log('Current image path:', item.frontmatter.image);
         return (
           <div class="carousel-item" style={index === 0 ? "display: block;" : "display: none;"}>
             {item.frontmatter.link ? (
