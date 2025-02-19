@@ -37,7 +37,7 @@ collections:
           required: false
         }
       - { label: "Designer", name: "designer", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Reference Docs", "General", "CSS", "Astro"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Residential Design", "Commercial Design", "Office Design", "Astro"] }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "carousel"
