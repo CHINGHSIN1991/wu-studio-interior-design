@@ -37,3 +37,20 @@ export interface Temp {
   designer: string[],
   photography: string[],
 }
+
+export interface CarouselData {
+  title: string,
+  description: string,
+  image: string,
+  link: string,
+  order: number,
+  active: boolean,
+  draft: boolean
+}
+export interface CarouselItem {
+  id: string,
+  data: CarouselData,
+  filePath: string,
+  digest: string,
+  collection: string
+}

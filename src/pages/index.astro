@@ -1,12 +1,13 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-// import Carousel from '../components/Carousel.astro';
+import Carousel from '../components/Carousel.astro';
 import { getCollection } from 'astro:content';
 import { getImagePath } from '../ts/utils';
 
 const carouselItems = await getCollection('carousel', ({ data }) => {
   return data.active && !data.draft;
 });
+
 ---
 
 <MainLayout>
@@ -20,7 +21,7 @@ const carouselItems = await getCollection('carousel', ({ data }) => {
       </div>
     ))
   }
-  <!-- <Carousel items={carouselItems} /> -->
+  <Carousel items={carouselItems} />
 </MainLayout>
 
 <style>

@@ -1,17 +1,8 @@
 ---
 import { Image } from "astro:assets"
-interface CarouselItem {
-  frontmatter: {
-    title: string;
-    description: string;
-    image: string;
-    link?: string;
-    order: number;
-    active: boolean;
-  }
-}
+import type { CarouselItem } from "../../types"
 
-const { items } = Astro.props;
+const { items } = Astro.props as { items: CarouselItem[] };
 ---
 
 <div class="carousel-container">
@@ -20,34 +11,32 @@ const { items } = Astro.props;
       items.map((item: CarouselItem, index: number) => {
         return (
           <div class="carousel-item" style={index === 0 ? "display: block;" : "display: none;"}>
-            {item.frontmatter.link ? (
-              <a href={`projects/${item.frontmatter.link}`}>
+            {item.data.link ? (
+              <a href={`projects/${item.data.link}`}>
                 <Image
-                  src={`/src${item.frontmatter.image}`} 
-                  alt={item.frontmatter.title}
+                  src={item.data.image} 
+                  alt={item.data.title}
                   width="1200"
                   height="600"
                   format="avif"
                   fit="cover"
                   quality={80}
-                  onError={(e) => console.log('Image failed to load:', e.target.src)}
                 />
               </a>
             ) : (
               <Image
-                src={`/src${item.frontmatter.image}`} 
-                alt={item.frontmatter.title}
+                src={item.data.image} 
+                alt={item.data.title}
                 width="1200"
                 height="600"
                 format="avif"
                 fit="cover"
                 quality={80}
-                onError={(e) => console.log('Image failed to load:', e.target.src)}
               />
             )}
             <div class="carousel-caption">
-              <h2>{item.frontmatter.title}</h2>
-              <p>{item.frontmatter.description}</p>
+              <h2>{item.data.title}</h2>
+              <p>{item.data.description}</p>
             </div>
           </div>
         )
