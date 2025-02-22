@@ -10,7 +10,7 @@ const { items } = Astro.props as { items: CarouselItem[] };
     {
       items.map((item: CarouselItem, index: number) => {
         return (
-          <div class="carousel-item" style={index === 0 ? "display: block;" : "display: none;"}>
+          <div class="carousel-item" style={index === 0 ? "opacity: 1;" : "opacity: 0;"}>
             {item.data.link ? (
               <a href={`projects/${item.data.link}`}>
                 <Image
@@ -49,24 +49,27 @@ const { items } = Astro.props as { items: CarouselItem[] };
 
 <style>
   .carousel-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
     position: relative;
+    overflow: hidden;
   }
 
   .carousel {
     position: relative;
     width: 100%;
-    height: 400px;
-    overflow: hidden;
+    height: 100%;
   }
 
   .carousel-item {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
   }
 
   .carousel-item img {
@@ -80,29 +83,44 @@ const { items } = Astro.props as { items: CarouselItem[] };
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
     color: white;
+  }
+
+  .carousel-caption h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .carousel-caption p {
+    font-size: 1.2rem;
   }
 
   .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     color: white;
     border: none;
-    padding: 16px;
+    padding: 2rem 1.5rem;
     cursor: pointer;
-    z-index: 1;
+    font-size: 1.5rem;
+    transition: background 0.3s ease;
+    z-index: 2;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
   }
 
   .prev {
-    left: 10px;
+    left: 2rem;
   }
 
   .next {
-    right: 10px;
+    right: 2rem;
   }
 </style>
 
@@ -114,16 +132,22 @@ const { items } = Astro.props as { items: CarouselItem[] };
     let currentIndex = 0;
 
     function showSlide(index: number) {
-      items.forEach((item) => (item as HTMLElement).style.display = 'none');
-      (items[index] as HTMLElement).style.display = 'block';
+      items.forEach((item) => {
+        (item as HTMLElement).style.opacity = '0';
+        (item as HTMLElement).style.zIndex = '0';
+      });
+      (items[index] as HTMLElement).style.opacity = '1';
+      (items[index] as HTMLElement).style.zIndex = '1';
     }
 
     function nextSlide() {
+      console.log('trigger nextSlide');
       currentIndex = (currentIndex + 1) % items.length;
       showSlide(currentIndex);
     }
 
     function prevSlide() {
+      console.log('trigger prevSlide');
       currentIndex = (currentIndex - 1 + items.length) % items.length;
       showSlide(currentIndex);
     }
@@ -143,6 +167,7 @@ const { items } = Astro.props as { items: CarouselItem[] };
     nextBtn?.addEventListener('click', nextSlide);
   }
 
-  // 等待 DOM 加載完成後初始化
-  document.addEventListener('astro:page-load', setupCarousel);
+  // 修改事件監聽方式
+  document.addEventListener('DOMContentLoaded', setupCarousel);
+  // document.addEventListener('astro:page-load', setupCarousel);
 </script> 
