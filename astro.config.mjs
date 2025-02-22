@@ -4,14 +4,15 @@ import { defineConfig } from 'astro/config'
 import UnoCSS from 'unocss/astro'
 import icon from 'astro-icon'
 import sitemap from '@astrojs/sitemap'
+import react from '@astrojs/react'
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     UnoCSS({
-      injectReset: true, // or a path to the reset file
+      injectReset: true,
     }),
     icon(),
     sitemap(),
+    react(),
   ],
 })
