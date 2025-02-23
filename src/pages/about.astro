@@ -1,15 +1,23 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Link from '../components/Link.astro';
+import { Image } from 'astro:assets';
 
 ---
 
 <MainLayout title="About Me">
   about
   <section class="container about" aria-label="About studio">
-    <img src="/images/headshot.jpg" alt="My headshot" width="200" height="300" style={{
-      objectFit: "cover"
-    }}>
+    <Image
+      src="/images/headshot.jpg"
+      alt="My headshot"
+      width="200"
+      height="300"
+      format="avif"
+      style={{
+        objectFit: "cover"
+      }}
+    />
     <div>
       <h1>About Me</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, accusamus excepturi itaque nemo maxime expedita, obcaecati facilis eius nam nihil aperiam rerum minus. Quas iusto aliquid fuga consequatur asperiores voluptatum.
