@@ -13,14 +13,14 @@ const {
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="w-full h-full">
 	<MainHead {title} {description} {image} {frontmatter} {robots}/>
-	<body>
-		<Nav />
-		<main>
+	<body class="flex flex-col min-h-screen w-full m-0">
+		<Nav class="sticky top-0 z-50" />
+		<main class="flex-grow">
 			<slot />
 		</main>
-		<Footer />
+		<Footer class="mt-auto" />
 	</body>
 </html>
 
