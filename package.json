@@ -18,8 +18,8 @@
     "astro": "^5.1.7",
     "astro-icon": "^1.1.5",
     "decap-cms-app": "^3.5.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@unocss/reset": "^65.4.3",
