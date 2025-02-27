@@ -13,7 +13,7 @@ const {
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="en" class="w-full h-full">
+<html lang="en" class="w-full h-full select-none">
 	<MainHead {title} {description} {image} {frontmatter} {robots}/>
 	<body class="flex flex-col min-h-screen w-full m-0">
 		<Nav class="sticky top-0 z-50" />
@@ -24,11 +24,29 @@ const {
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+<script>
+	function disableRightClick(e: MouseEvent) {
+		e.preventDefault();
+		return false;
+	}
+
+	function disableSelection(e: Event) {
+		e.preventDefault();
+		return false;
+	}
+
+	document.addEventListener('contextmenu', disableRightClick);
+	document.addEventListener('selectstart', disableSelection);
+	document.addEventListener('copy', disableSelection);
+	document.addEventListener('dragstart', disableSelection);
+</script>
+
+<style is:global>
+	img {
+		-webkit-user-drag: none;
+		-khtml-user-drag: none;
+		-moz-user-drag: none;
+		-o-user-drag: none;
+		user-drag: none;
 	}
 </style>
