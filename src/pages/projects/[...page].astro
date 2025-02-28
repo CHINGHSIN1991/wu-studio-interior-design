@@ -21,21 +21,41 @@ const { page } = Astro.props as any;
 ---
 
 <MainLayout title="Projects">
-  <section class="container" aria-label="new project posts">
-    <h1 class="h1">Projects</h1>
-    <div class="post-container">
-      {
-        page.data.map(
-          (project: Project) => <ProjectCard project={project}/>
-        )
-      }
-    </div>
-    ------
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  <section class="container mx-auto px-4 py-12" aria-label="Projects list">
+    <h1 class="text-4xl font-bold mb-8 text-center">Projects</h1>
+    
+    {
+      page.data.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            page.data.map((project: Project) => (
+              <ProjectCard project={project}/>
+            ))
+          }
+        </div>
+      ) : (
+        <div class="flex flex-col items-center justify-center py-20 text-gray-500">
+          <h2 class="text-2xl font-semibold mb-2">No Projects Found</h2>
+          <p class="text-center max-w-md mb-8">
+            We haven't added any projects yet. Please check back later!
+          </p>
+          <a 
+            href="/" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+          >
+            Back to Home
+          </a>
+        </div>
+      )
+    }
+
+    {page.data.length > 0 && (
+      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+    )}
   </section>
   <aside class="container" aria-label="Blog categories">
     <h2>Blog Categories</h2>
-    <!-- <CategoryCloud showCount /> -->
+    <CategoryCloud showCount />
   </aside>
 </MainLayout>
 
