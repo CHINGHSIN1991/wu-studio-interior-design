@@ -43,11 +43,34 @@ collections:
             }
           }
         }
-      - { label: "設計師", name: "designer", widget: "string" }
-      - { 
-          label: "分類", 
-          name: "category", 
-          widget: "select", 
+      - {
+          label: "空間設計",
+          name: "designers",
+          widget: "list",
+          field: { label: "設計師", name: "name", widget: "string" },
+          required: true,
+          min: 1
+        }
+      - {
+          label: "空間攝影",
+          name: "photographer",
+          widget: "list",
+          field: { label: "攝影師", name: "name", widget: "string" },
+        }
+      - { label: "基地位置", name: "location", widget: "string" }
+      - {
+          label: "分類",
+          name: "category",
+          widget: "select",
           options: ["Residential Design", "Commercial Design", "Office Design"]
+        }
+      - {
+          label: "竣工日期",
+          name: "completionDate",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          required: false
         }
       - { label: "草稿", name: "draft", widget: "boolean", default: false }
