@@ -31,22 +31,17 @@ collections:
       - { label: "標題", name: "title", widget: "string" }
       - { label: "描述", name: "description", widget: "string" }
       - { label: "封面圖", name: "cover", widget: "image", required: true }
-      - {
-          label: "專案圖片",
-          name: "images",
-          widget: "list",
-          summary: "{{fields.image}}",
-          field: {
-            label: "圖片",
-            name: "image",
-            widget: "image",
-            media_library: {
-              config: {
-                multiple: true
-              }
+      - { 
+          label: "專案圖片", 
+          name: "images", 
+          widget: "image",
+          required: false,
+          allow_multiple: true,
+          media_library: {
+            config: {
+              multiple: true
             }
-          },
-          required: false
+          }
         }
       - { label: "設計師", name: "designer", widget: "string" }
       - { 
