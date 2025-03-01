@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon/components';
 interface Props {
   text: string;
   href: string;
-  style: "primary" | "secondary";
+  style?: string;
   icon?: {
     name: string;
     side: "left" | "right";
@@ -29,22 +29,24 @@ const {
 <a
   href={href}
   class:list={[
-    "link",
-    classes,
-    style,
-    { filled: isFilled, bordered: borderVisible}
+    "inline-flex items-center gap-2 px-4 py-2 transition-colors duration-200",
+    isFilled ? 
+      "bg-primary text-white hover:bg-primary-dark" : 
+      "text-primary hover:text-primary-dark",
+    borderVisible && "border border-primary rounded-md",
+    classes
   ]}
   {...rest}
 >
 {
   icon && icon.side === "left" && (
-    <Icon name={icon.name} height="24" width="24"/>
+    <Icon name={icon.name} class="w-4 h-4"/>
   )
 }
 <span>{text}</span>
 {
   icon && icon.side === "right" && (
-    <Icon name={icon.name} height="24" width="24"/>
+    <Icon name={icon.name} class="w-4 h-4"/>
   )
 }
 </a>
