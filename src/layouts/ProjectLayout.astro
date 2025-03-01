@@ -7,9 +7,6 @@ import MainLayout from "./MainLayout.astro";
 import CategoryCloud from "../components/CategoryCloud.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
 
-// utils imports
-import { getImagePath } from "../ts/utils";
-
 const allProjects = await getCollection('projects', ({ data }) => {
   return !data.draft;
 });
@@ -17,13 +14,13 @@ const allProjects = await getCollection('projects', ({ data }) => {
 
 const { project } = Astro.props
 const {
-  title, 
+  title,
   description,
   date,
   category,
   designer,
   cover,
-  projectImages,
+  images,
 } = project.data
 
 const relatedPosts = allProjects.filter(
@@ -38,16 +35,16 @@ const relatedPosts = allProjects.filter(
   <div class="project-content">
     <div class="content">
       {
-        projectImages?.map((img) => {console.log(getImagePath(img.image));console.log(img);return (<Image
-          src={img.image}
-          alt={img.alt}
+        images?.map((url: string) => (<Image
+          src={url}
+          alt={title}
           width="400"
           height="600"
           format="avif"
           loading="lazy"
           fit="cover"
           quality={80}
-        />)})
+        />))
       }
     </div>
     <div class="content">
@@ -71,8 +68,8 @@ const relatedPosts = allProjects.filter(
 </MainLayout>
 
 <div class="project-images">
-  {projectImages && projectImages.map((item) => (
-    <img src={item.image} alt="Project image" />
+  {images && images.map((url: string) => (
+    <img src={url} alt="Project image" />
   ))}
 </div>
 

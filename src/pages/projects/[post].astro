@@ -23,14 +23,12 @@ if (!project) {
     <h1>{project.data.title}</h1>
     <p>{project.data.description}</p>
     
-    {/* 顯示封面圖 */}
-    <img src={project.data.cover.image} alt={project.data.cover.alt} />
+    <img src={project.data.cover} alt={project.data.title} />
     
-    {/* 顯示專案圖片集 */}
-    {project.data.projectImages && (
+    {project.data.images && (
       <div class="project-images">
-        {project.data.projectImages.map((img) => (
-          <img src={img.image} alt={img.alt} />
+        {project.data.images.map((url) => (
+          <img src={url} alt={project.data.title} />
         ))}
       </div>
     )}
