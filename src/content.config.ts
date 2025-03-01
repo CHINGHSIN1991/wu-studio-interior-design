@@ -6,7 +6,7 @@ const carousel = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    image: z.string(),
+    url: z.string(),
     link: z.string().optional(),
     order: z.number().default(1),
     active: z.boolean().default(true),
@@ -19,14 +19,8 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    cover: z.object({
-      image: z.string(),
-      alt: z.string()
-    }),
-    projectImages: z.array(z.object({
-      image: z.string(),
-      alt: z.string()
-    })).optional(),
+    cover: z.string(),
+    images: z.array(z.string()).optional(),
     designer: z.string(),
     category: z.string(),
     draft: z.boolean().default(false)

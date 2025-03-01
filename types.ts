@@ -10,12 +10,11 @@ export interface ProjectFrontmatter {
   title: string;
   date: string;
   designer: string;
-  cover: Img;
-  images: Img[];
+  cover: string;
+  images: string[];
   description: string;
   draft: boolean;
   category: string;
-  projectImages: Img[];
 }
 
 export interface Project {

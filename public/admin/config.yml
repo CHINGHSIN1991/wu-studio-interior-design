@@ -6,40 +6,6 @@ media_folder: "public/assets/images"
 public_folder: "/assets/images"
 
 collections:
-  - name: "projects"
-    label: "Projects"
-    format: "json"
-    folder: "src/content/projects"
-    create: true
-    publish: true
-    fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "../../layouts/ProjectLayout.astro" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-      - {
-          label: "Cover Image",
-          name: "cover",
-          widget: "object",
-          fields: [
-            { label: "Image", name: "image", widget: "image", required: true },
-            { label: "Alt Text", name: "alt", widget: "string", required: true }
-          ]
-        }
-      - { 
-          label: "Project Images", 
-          name: "projectImages", 
-          widget: "list", 
-          summary: "{{fields.image}} - {{fields.alt}}", 
-          fields: [
-            { label: "Image", name: "image", widget: "image" },
-            { label: "Alt Text", name: "alt", widget: "string" }
-          ],
-          required: false
-        }
-      - { label: "Designer", name: "designer", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Residential Design", "Commercial Design", "Office Design", "Astro"] }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - { label: "Body", name: "body", widget: "markdown" }
   - name: "carousel"
     label: "輪播圖"
     format: "json"
@@ -49,8 +15,34 @@ collections:
     fields:
       - { label: "標題", name: "title", widget: "string" }
       - { label: "描述", name: "description", widget: "string" }
-      - { label: "輪播圖片", name: "image", widget: "image", required: true }
+      - { label: "輪播圖片", name: "url", widget: "image", required: true }
       - { label: "連結", name: "link", widget: "string", required: false }
       - { label: "排序", name: "order", widget: "number", default: 1 }
       - { label: "啟用狀態", name: "active", widget: "boolean", default: true }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
+
+  - name: "projects"
+    label: "專案"
+    format: "json"
+    folder: "src/content/projects"
+    create: true
+    publish: true
+    fields:
+      - { label: "標題", name: "title", widget: "string" }
+      - { label: "描述", name: "description", widget: "string" }
+      - { label: "封面圖", name: "cover", widget: "image", required: true }
+      - { 
+          label: "專案圖片", 
+          name: "images", 
+          widget: "list",
+          field: { label: "圖片", name: "image", widget: "image" },
+          required: false
+        }
+      - { label: "設計師", name: "designer", widget: "string" }
+      - { 
+          label: "分類", 
+          name: "category", 
+          widget: "select", 
+          options: ["Residential Design", "Commercial Design", "Office Design"]
+        }
       - { label: "草稿", name: "draft", widget: "boolean", default: false }
