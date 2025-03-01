@@ -1,0 +1,22 @@
+{
+  "draft": false,
+  "designers": [
+    "test",
+    "designer"
+  ],
+  "photographer": [
+    "phper",
+    "aaaaddd"
+  ],
+  "completionDate": "2025-03-01",
+  "location": "New Taipei City",
+  "cover": "/assets/images/image-default.jpg",
+  "title": "testtest",
+  "images": [
+    "/assets/images/carbon-2-.png",
+    "/assets/images/image-default.jpg",
+    "/assets/images/headshot.jpg"
+  ],
+  "description": "description description-description description",
+  "category": "Commercial Design"
+}
