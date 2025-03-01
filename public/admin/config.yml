@@ -34,9 +34,14 @@ collections:
       - { 
           label: "專案圖片", 
           name: "images", 
-          widget: "list",
-          field: { label: "圖片", name: "image", widget: "image" },
-          required: false
+          widget: "image",
+          required: false,
+          allow_multiple: true,
+          media_library: {
+            config: {
+              multiple: true
+            }
+          }
         }
       - { label: "設計師", name: "designer", widget: "string" }
       - { 
