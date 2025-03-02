@@ -10,7 +10,7 @@ const { project } = Astro.props
   <small>
     <a href={`/category/${slugify(project.data.category)}`} class="badge">{project.data.category}</a>
   </small>
-  <a href={project.data.title}>
+  <a href={`/projects/${slugify(project.data.title)}`}>
     <Image
       src={project.data.cover ?? "/assets/images/fallback-image.png"}
       alt="Project cover image"
