@@ -45,8 +45,7 @@ const { name } = Astro.props
 const allProjects = await getCollection('projects', ({ data }) => {
   return !data.draft;
 });
-const catPosts = allProjects.filter((post) => post.data.category === category);
-
+const catPosts = allProjects.filter((post) => slugify(post.data.category) === category);
 ---
 
 <MainLayout title={name}>
