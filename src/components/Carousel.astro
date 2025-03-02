@@ -17,7 +17,7 @@ const { items } = Astro.props as { items: CarouselItem[] };
                 {item.data.link ? (
                   <a href={`projects/${item.data.link}`}>
                     <Image
-                      src={item.data.image} 
+                      src={item.data.url}
                       alt={item.data.title}
                       width="1200"
                       height="600"
@@ -29,7 +29,7 @@ const { items } = Astro.props as { items: CarouselItem[] };
                   </a>
                 ) : (
                   <Image
-                    src={item.data.image} 
+                    src={item.data.url} 
                     alt={item.data.title}
                     width="1200"
                     height="600"
@@ -82,7 +82,6 @@ const { items } = Astro.props as { items: CarouselItem[] };
     let currentIndex = 0;
 
     function showSlide(index: number) {
-      // 更新輪播項目
       items.forEach((item) => {
         (item as HTMLElement).style.opacity = '0';
         (item as HTMLElement).style.zIndex = '0';
@@ -90,7 +89,6 @@ const { items } = Astro.props as { items: CarouselItem[] };
       (items[index] as HTMLElement).style.opacity = '1';
       (items[index] as HTMLElement).style.zIndex = '1';
 
-      // 更新點點狀態
       dots.forEach((dot, i) => {
         dot.classList.toggle('bg-white', i === index);
         dot.classList.toggle('bg-white/50', i !== index);
@@ -112,7 +110,6 @@ const { items } = Astro.props as { items: CarouselItem[] };
 
     // 自動輪播
     let interval = setInterval(nextSlide, 5000);
-
     const carousel = document.querySelector('.carousel');
     carousel?.addEventListener('mouseenter', () => clearInterval(interval));
     carousel?.addEventListener('mouseleave', () => {

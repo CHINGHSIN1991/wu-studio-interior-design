@@ -21,8 +21,11 @@ const projects = defineCollection({
     description: z.string(),
     cover: z.string(),
     images: z.array(z.string()).optional(),
-    designer: z.string(),
-    category: z.string(),
+    designers: z.array(z.string()),
+    photographer: z.array(z.string()).optional(),
+    location: z.string(),
+    category: z.enum(["Residential Design", "Commercial Design", "Office Design"]),
+    completionDate: z.string().optional(),
     draft: z.boolean().default(false)
   })
 });

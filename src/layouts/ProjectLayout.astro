@@ -18,7 +18,7 @@ const {
   description,
   date,
   category,
-  designer,
+  designers,
   cover,
   images,
 } = project.data
@@ -30,7 +30,7 @@ const relatedPosts = allProjects.filter(
 
 <MainLayout {title} {description} image={cover}>
   <PostHeader
-    {title} {description} {date} {category} {cover} {designer}
+    {title} {description} {date} {category} {cover} {designers}
   />
   <div class="project-content">
     <div class="content">

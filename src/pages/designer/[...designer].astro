@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 
   // const formattedPosts = formatProjectPost(allProjects);
   const allDesigners = [...new Set(
-    allProjects.map((post) => post.data.designer).flat()
+    allProjects.map((post) => post.data.designers).flat()
   )]
   
   // 如果沒有作者，返回預設路徑
@@ -38,7 +38,7 @@ export async function getStaticPaths() {
   }
 
   return allDesigners.map((designer) => {
-    const designerPosts = allProjects.filter((post) => post.data.designer === designer);
+    const designerPosts = allProjects.filter((post) => post.data.designers.includes(designer));
     return {
       params: { designer: slugify(designer)},
       props: {
@@ -49,12 +49,8 @@ export async function getStaticPaths() {
   })
 }
 
-// const { designer } = Astro.params;
 const { posts, designerName } = Astro.props
-
-
-
-
+console.log(posts)
 ---
 
 <MainLayout title={designerName}>

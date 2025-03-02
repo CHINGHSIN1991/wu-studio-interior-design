@@ -40,7 +40,7 @@ export interface Temp {
 export interface CarouselData {
   title: string,
   description: string,
-  image: string,
+  url: string,
   link: string,
   order: number,
   active: boolean,

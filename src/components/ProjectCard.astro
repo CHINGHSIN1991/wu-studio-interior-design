@@ -1,10 +1,9 @@
 ---
-import type { Project } from "../../types";
 import { Image } from "astro:assets"
 import Link from "./Link.astro";
-import { slugify, formatDate, getImagePath } from "../ts/utils"
+import { slugify, formatDate } from "../ts/utils"
 
-const { project} = Astro.props
+const { project } = Astro.props
 ---
 
 <article class="card">
@@ -13,8 +12,8 @@ const { project} = Astro.props
   </small>
   <a href={project.data.title}>
     <Image
-      src={project.data.cover?.image ?? getImagePath("/assets/images/fallback-image.png")}
-      alt={project.data.cover?.alt ?? "Project cover image"}
+      src={project.data.cover ?? "/assets/images/fallback-image.png"}
+      alt="Project cover image"
       width="400"
       height="250"
       format="avif"
@@ -22,7 +21,9 @@ const { project} = Astro.props
       quality={80}
     />
     <h3 class="my-1 py-2 text-2xl font-bold">{project.data.title}</h3>
-    <p>by <a href={`/designer/${slugify(project.data.designer)}`}>{project.data.designer}</a> · {formatDate(project.data?.date)}</p>
+    <p>by {project.data.designers.map((designer: string) => (
+      <a href={`/designer/${slugify(designer)}`}>{designer}</a>
+    ))} · {formatDate(project.data?.date)}</p>
   </a>
   <Link href={project.data.url} text="Read more ..." style="secondary"/>
 </article>
