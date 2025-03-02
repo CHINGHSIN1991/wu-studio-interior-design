@@ -1,0 +1,151 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"
+---
+
+<MainLayout title="Contact">
+  <div class="container mx-auto px-4 py-8">
+    <form
+      data-netlify="true"
+      netlify-honeypot
+      name="contact"
+      method="POST"
+      action="/success"
+      class="max-w-2xl mx-auto flex flex-col gap-6"
+    >
+      <p class="clip-0 clip-path-inset-50% h-1px overflow-hidden absolute whitespace-nowrap w-1px">
+        <label>
+          Don't fill this out if you're human: <input name="bot-field" />
+        </label>
+      </p>
+      <input type="hidden" name="form-name" value="contact" />
+      
+      <div class="flex flex-col gap-2">
+        <label for="name" class="text-sm required">姓名</label>
+        <input 
+          id="name" 
+          type="text" 
+          name="name"
+          placeholder="請輸入您的姓名"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="title" class="text-sm required">稱呼</label>
+        <input 
+          id="title" 
+          type="text" 
+          name="title"
+          placeholder="先生 / 小姐 / 其他"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="phone" class="text-sm required">連絡電話</label>
+        <input 
+          id="phone" 
+          type="tel" 
+          name="phone"
+          placeholder="0912345678 / 02-12345678"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="email" class="text-sm required">Email</label>
+        <input 
+          id="email" 
+          type="email" 
+          name="email"
+          placeholder="example@maill.com"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="budget" class="text-sm required">預算</label>
+        <select 
+          id="budget" 
+          name="budget"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full"
+        >
+          <option value="">請選擇預算範圍</option>
+          <option value="100-300">100-300萬</option>
+          <option value="300-500">300-500萬</option>
+          <option value="500+">500萬以上</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="location" class="text-sm required">案件位置</label>
+        <input 
+          id="location" 
+          type="text" 
+          name="location"
+          placeholder="縣市及行政區"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="size" class="text-sm required">室內坪數</label>
+        <input 
+          id="size" 
+          type="text" 
+          name="size"
+          placeholder="室內實際坪數"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full" 
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="projectType" class="text-sm required">諮詢方向</label>
+        <select 
+          id="projectType" 
+          name="projectType"
+          required
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full"
+        >
+          <option value="">選擇您的案件類型</option>
+          <option value="residential">住宅空間</option>
+          <option value="commercial">商業空間</option>
+          <option value="office">辦公空間</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-sm">詳細需求及內容</label>
+        <textarea 
+          id="message" 
+          name="message"
+          placeholder="案件詳細需求或其他方便聯絡的方式"
+          rows="5"
+          class="rounded-md border-solid border-gray-300 border-1 text-inherit py-3 px-5 w-full"
+        ></textarea>
+      </div>
+
+      <button 
+        type="submit"
+        class="bg-primary border-solid border-primary border-1 text-gray-800 text-4 w-full md:w-1/3 rounded-md py-3 px-5 mt-4 mx-auto hover:opacity-80 transition-opacity"
+      >
+        送出表單
+      </button>
+    </form>
+  </div>  
+</MainLayout>
+
+<style>
+  .required::after {
+    content: "*";
+    color: #ff0000;
+    margin-left: 4px;
+  }
+</style>
