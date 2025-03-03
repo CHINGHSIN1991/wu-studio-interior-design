@@ -41,15 +41,17 @@ export interface CarouselData {
   title: string,
   description: string,
   url: string,
-  link: string,
+  link?: string,
   order: number,
   active: boolean,
   draft: boolean
 }
+
 export interface CarouselItem {
   id: string,
+  collection: string,
   data: CarouselData,
-  filePath: string,
-  digest: string,
-  collection: string
+  body?: string,
+  filePath?: string,
+  rendered?: unknown
 }

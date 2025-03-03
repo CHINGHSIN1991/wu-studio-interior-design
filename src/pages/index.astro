@@ -1,16 +1,17 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Carousel from '../components/Carousel.astro';
+import Carousel from '../components/Carousel';
 import { getCollection } from 'astro:content';
 
 const carouselItems = await getCollection('carousel', ({ data }) => {
   return data.active && !data.draft;
 });
 
+const sortedItems = carouselItems.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <MainLayout>
-  <Carousel items={carouselItems} />
+  <Carousel client:load items={sortedItems} />
 </MainLayout>
 
 <style>
