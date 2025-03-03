@@ -10,6 +10,10 @@ const navData = [
   {
     name: "Contact us",
     path: "/contact/"
+  },
+  {
+    name: "Workflow",
+    path: "/workflow/"
   }
 ]
 

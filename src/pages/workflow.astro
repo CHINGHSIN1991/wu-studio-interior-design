@@ -1,0 +1,147 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="工作流程">
+  <div 
+    class="container mx-auto px-4 py-12"
+    transition:animate="slide"
+  >
+    <h1 
+      class="text-4xl font-bold text-center mb-16"
+      transition:name="page-title"
+    >
+      Workflow
+    </h1>
+    
+    <div class="max-w-4xl mx-auto">
+      <h2 
+        class="text-2xl font-semibold mb-8"
+        transition:name="section-title"
+      >
+        工作流程
+      </h2>
+      
+      <div class="space-y-12">
+        {/* 工作步驟 */}
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">1</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">初步諮詢</h3>
+            <p class="text-gray-600">瞭解案件現況及空間需求、特殊喜好，工程預算等說明與討論交流及費用方式。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">2</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">現勘丈量</h3>
+            <p class="text-gray-600">設計師至現場，基本圖尺寸進行放樣，拍照記錄，作為設計依據（視性質交量後進行二次丈量）。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">3</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">平面規劃</h3>
+            <p class="text-gray-600">提出平面設計與空間規劃方案，確認設計發展方向。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">4</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">簽署合約</h3>
+            <p class="text-gray-600">簽訂正式設計合約平收取設計費，開始設計內容。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">5</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">細部設計</h3>
+            <p class="text-gray-600">進行空間設計審視並與業主溝通圖面及材料內設計細節，確認細部計畫。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">6</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">工程報價</h3>
+            <p class="text-gray-600">依據設計圖面內容及使用材料，提供施工工程報價。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">7</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">委任工程</h3>
+            <p class="text-gray-600">確認工程報價及設計圖面作為內容，簽訂正式工程合約，進入工程階段。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">8</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">工程施工</h3>
+            <p class="text-gray-600">依據合圖面及工程進度進行施工工程作業並自行約執行收取進度款項費用。</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 transition-all duration-300 hover:translate-x-2">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">9</div>
+          <div>
+            <h3 class="text-xl font-medium mb-2">完工交屋</h3>
+            <p class="text-gray-600">完工驗收完畢，點交交屋。</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 備註說明 */}
+      <div 
+        class="mt-16 space-y-4 text-gray-600"
+        transition:animate="fade"
+      >
+        <p>※ 現勘費台北地區NT$1500元，市郊地區另計（可抵正式設計費）。</p>
+        <p>※ 設計費NT$15,000/坪，委託設計案件優惠金額NT$10萬元。</p>
+        <p>※ 工程費：新成屋每坪NT$12萬元起，老屋翻新每坪NT$15萬元起。</p>
+        <p>※ 工程管理費：總工程費 10%（各北地區），其他地區另計。</p>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .bg-primary {
+    background-color: #2bdcd2;
+  }
+
+  /* 添加滑入動畫 */
+  [transition\:animate="slide"] {
+    animation: slide-in 0.5s ease-out;
+  }
+
+  [transition\:animate="fade"] {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
