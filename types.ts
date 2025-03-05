@@ -1,26 +1,26 @@
 export type ProjectCategory = 'home' | 'business'
 export type MeasureUnit = 'm' | 'tp'
-export interface Img {
-  src: string;
-  alt: string;
-}
 
-export interface ProjectFrontmatter {
-  layout: string;
+export interface ProjectData {
   title: string;
   date: string;
-  designer: string;
+  designers: string[];
+  photographers?: string[];
+  location: string;
+  category: string;
+  completionDate: string;
   cover: string;
   images: string[];
   description: string;
   draft: boolean;
-  category: string;
 }
 
 export interface Project {
-  frontmatter: ProjectFrontmatter;
-  url: string;
-  content?: string;
+  id: string;
+  data: ProjectData;
+  filePath: string;
+  digest: string;
+  collection: string;
 }
 
 export interface Temp {

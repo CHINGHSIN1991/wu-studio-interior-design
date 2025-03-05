@@ -22,8 +22,8 @@ export default function jsonLDGenerator({ type, post, url }: PostParam) {
         "cover": "${post.cover.src}",
         "designer": {
           "@type": "Person",
-          "name": "${post.designer}",
-          "url": "/designer/${slugify(post.designer)}"
+          "name": "${post.designers[0]}",
+          "url": "/designer/${slugify(post.designers[0])}"
         },
         "datePublished": "${post.date}"
       }
