@@ -8,13 +8,13 @@ const {
   title = "My Astro Blog",
   description = "My musings about the Astro framework",
 	image,
-	frontmatter,
-	robots
+	robots,
+	project,
 } = Astro.props;
 ---
 <!doctype html>
 <html lang="en" class="w-full h-full select-none">
-	<MainHead {title} {description} {image} {frontmatter} {robots}/>
+	<MainHead {title} {description} {image} {robots} {project}/>
 	<body class="flex flex-col min-h-screen w-full m-0">
 		<Nav class="sticky top-0 z-50" />
 		<main class="flex-grow">

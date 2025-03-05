@@ -28,7 +28,7 @@ const relatedPosts = allProjects.filter(
 ).slice(0,3)
 ---
 
-<MainLayout {title} {description} image={cover}>
+<MainLayout {title} {description} image={cover} project={project.data}>
   <PostHeader
     {title} {description} {date} {category} {cover} {designers}
   />
