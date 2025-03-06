@@ -45,22 +45,109 @@ const { name } = Astro.props
 const allProjects = await getCollection('projects', ({ data }) => {
   return !data.draft;
 });
+
 const catPosts = allProjects.filter((post) => slugify(post.data.category) === category);
+
+// 對應的中文類別名稱
+const categoryNameMap: Record<string, string> = {
+  "Residential Design": "住宅空間設計",
+  "Commercial Design": "商業空間設計",
+  "Office Design": "辦公空間設計",
+  "Astro": "其他專案"
+};
+
+// 獲取中文類別名稱
+const chineseName = categoryNameMap[name] || name;
 ---
 
-<MainLayout title={name}>
-  <section class="container" aria-label={`Posts about ${name}`}>
-    <h1 class="h1">Posts about {name}</h1>
-    {catPosts.length === 0 ? (
-      <NoResultBlock />
-    ) : (
-      <div class="post-container">
-        {
-          catPosts.map(
-            (project) => <ProjectCard {project} />
-          )
-        }
+<MainLayout title={`${chineseName} - 專案類別`}>
+  <section 
+    class="container mx-auto px-4 py-16 animate-slide-in"
+    transition:animate="slide"
+    aria-label={`${name} 類別的專案`}
+  >
+    <div class="max-w-6xl mx-auto">
+      <h1 
+        class="text-4xl md:text-5xl font-bold text-center mb-4"
+        transition:name="page-title"
+      >
+        {chineseName}
+      </h1>
+      
+      <p class="text-center text-gray-500 mb-16 max-w-2xl mx-auto">
+        探索我們精心打造的{chineseName}專案，每個專案都展現獨特設計理念與空間魅力。
+      </p>
+      
+      {catPosts.length === 0 ? (
+        <div class="flex flex-col items-center justify-center py-20 text-gray-500 bg-gray-50 rounded-lg shadow-inner">
+          <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 mb-4">
+            <span class="text-2xl">!</span>
+          </div>
+          <h2 class="text-2xl font-semibold mb-2">尚無專案</h2>
+          <p class="text-center max-w-md mb-8">
+            此類別目前尚未有任何專案，請查看其他類別或稍後再回來。
+          </p>
+          <a 
+            href="/projects" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-[#2bdcd2] text-white rounded-lg hover:bg-opacity-90 transition-colors"
+          >
+            瀏覽所有專案
+          </a>
+        </div>
+      ) : (
+        <>
+          <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h2 class="text-2xl font-semibold mb-4 border-l-4 border-[#2bdcd2] pl-4">類別介紹</h2>
+            <p class="text-gray-600">
+              {
+                name === "Residential Design" ? 
+                "住宅空間設計注重生活機能與美學結合，打造舒適且個性化的居住環境。我們的住宅設計以使用者為中心，創造兼具實用性與美感的生活空間。" :
+                name === "Commercial Design" ? 
+                "商業空間設計著重品牌形象的傳達與顧客體驗的提升。我們的商業設計強調空間故事性，為品牌創造獨特的視覺標識和沈浸式環境。" :
+                name === "Office Design" ? 
+                "辦公空間設計平衡工作效率與員工舒適度，創造激發創意的工作環境。我們的辦公設計注重動線規劃與功能分區，滿足現代工作場所的多元需求。" :
+                "我們的專業設計團隊為各類空間提供創新的設計解決方案，無論是特殊用途的場域或是跨界整合的設計項目，都能展現我們的專業與創意。"
+              }
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+              catPosts.map((project) => (
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+                  <ProjectCard project={project} />
+                </div>
+              ))
+            }
+          </div>
+        </>
+      )}
+      
+      <div class="mt-12 text-center">
+        <a 
+          href="/projects" 
+          class="inline-flex items-center gap-2 px-6 py-3 border border-[#2bdcd2] text-[#2bdcd2] rounded-lg hover:bg-[#2bdcd2] hover:text-white transition-colors"
+        >
+          返回全部專案
+        </a>
       </div>
-    )}
+    </div>
   </section>
 </MainLayout>
+
+<style>
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.5s ease-out;
+  }
+</style>

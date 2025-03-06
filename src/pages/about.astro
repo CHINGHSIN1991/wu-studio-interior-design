@@ -5,28 +5,112 @@ import { Image } from 'astro:assets';
 
 ---
 
-<MainLayout title="About Me">
-  about
-  <section class="container about" aria-label="About studio">
-    <Image
-      src="/images/headshot.jpg"
-      alt="My headshot"
-      width="200"
-      height="300"
-      format="avif"
-      style={{
-        objectFit: "cover"
-      }}
-    />
-    <div>
-      <h1>About Me</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, accusamus excepturi itaque nemo maxime expedita, obcaecati facilis eius nam nihil aperiam rerum minus. Quas iusto aliquid fuga consequatur asperiores voluptatum.
+<MainLayout title="關於我們">
+  <section 
+    class="container mx-auto px-4 py-16 animate-slide-in"
+    transition:animate="slide"
+  >
+    <div class="max-w-4xl mx-auto">
+      <h1 
+        class="text-4xl md:text-5xl font-bold text-center mb-4"
+        transition:name="page-title"
+      >
+        About Us
+      </h1>
+      
+      <p class="text-center text-gray-500 mb-16 max-w-2xl mx-auto">
+        專注於打造美觀且實用的空間，我們的設計理念源於對細節的關注和對客戶需求的理解。
       </p>
-      <Link href="aaa" style="primary" text="Contact Me"/>
-    </div>    
+
+      <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start mb-16">
+        <div class="w-full md:w-2/5">
+          <div class="relative">
+            <Image
+              src="/images/headshot.jpg"
+              alt="吳氏室內設計工作室"
+              width={600}
+              height={800}
+              format="avif"
+              class="rounded-lg shadow-md w-full h-auto object-cover"
+            />
+            <div class="absolute -bottom-4 -right-4 bg-[#2bdcd2] text-white px-6 py-3 rounded shadow-lg hidden md:block">
+              <p class="font-medium">專業空間設計</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full md:w-3/5">
+          <h2 
+            class="text-2xl font-semibold mb-6 border-l-4 border-[#2bdcd2] pl-4"
+            transition:name="section-title"
+          >
+            設計理念
+          </h2>
+          
+          <div class="space-y-4 text-gray-600">
+            <p>
+              吳氏室內設計成立於2010年，是一間專注於打造富有生命力與人文氣息空間的設計工作室。我們深信，好的設計不僅是美觀，更應該是實用且能夠提升生活品質的。
+            </p>
+            <p>
+              我們的團隊由一群熱愛設計且經驗豐富的專業人士組成，每位設計師都擁有獨特的視角和專業知識，能夠為客戶帶來多元化的設計方案。
+            </p>
+            <p>
+              無論是住宅空間、商業空間還是辦公空間，我們都能夠根據客戶的需求和預算，提供最適合的設計解決方案。我們注重每一個細節，從平面規劃到材料選擇，從色彩搭配到燈光設計，都經過精心考量。
+            </p>
+            
+            <div class="pt-4">
+              <Link href="/contact" style="primary" text="聯絡我們" classes="inline-block bg-[#2bdcd2] text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition-all"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-lg p-8 shadow-inner">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-700">我們的專業服務</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all hover:shadow-md">
+            <div class="w-12 h-12 bg-[#2bdcd2] rounded-full flex items-center justify-center text-white mb-4">
+              <span class="text-xl font-bold">1</span>
+            </div>
+            <h3 class="text-xl font-medium mb-2">空間規劃</h3>
+            <p class="text-gray-600">針對不同空間特性，提供最優化的平面配置與動線規劃，創造舒適且實用的生活環境。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all hover:shadow-md">
+            <div class="w-12 h-12 bg-[#2bdcd2] rounded-full flex items-center justify-center text-white mb-4">
+              <span class="text-xl font-bold">2</span>
+            </div>
+            <h3 class="text-xl font-medium mb-2">材質選搭</h3>
+            <p class="text-gray-600">精選優質材料，從牆面、地板到家具配件，每一處細節都經過精心挑選，確保品質與美感兼具。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 transition-all hover:shadow-md">
+            <div class="w-12 h-12 bg-[#2bdcd2] rounded-full flex items-center justify-center text-white mb-4">
+              <span class="text-xl font-bold">3</span>
+            </div>
+            <h3 class="text-xl font-medium mb-2">施工監督</h3>
+            <p class="text-gray-600">全程參與施工過程，嚴格監控品質與進度，確保設計理念得以完美呈現於實際空間中。</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </MainLayout>
 
 <style>
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
+  .animate-slide-in {
+    animation: slide-in 0.5s ease-out;
+  }
 </style>

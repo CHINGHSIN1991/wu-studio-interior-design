@@ -52,19 +52,86 @@ export async function getStaticPaths() {
 const { posts, designerName } = Astro.props
 ---
 
-<MainLayout title={designerName}>
-  <section class="container" aria-label={`Posts about ${designerName}`}>
-    <h1 class="h1">Posts by {designerName}</h1>
-    {posts.length === 0 ? (
-      <NoResultBlock />
-    ) : (
-      <div class="post-container">
-        {
-          posts.map(
-            (project) => <ProjectCard project={project} />
-          )
-        }
+<MainLayout title={`${designerName} - 設計師作品`}>
+  <section 
+    class="container mx-auto px-4 py-16 animate-slide-in"
+    transition:animate="slide"
+    aria-label={`${designerName} 的作品集`}
+  >
+    <div class="max-w-6xl mx-auto">
+      <h1 
+        class="text-4xl md:text-5xl font-bold text-center mb-4"
+        transition:name="page-title"
+      >
+        {designerName}
+      </h1>
+      
+      <p class="text-center text-gray-500 mb-16 max-w-2xl mx-auto">
+        探索 {designerName} 的設計作品集，了解其獨特的設計理念與風格。
+      </p>
+      
+      {posts.length === 0 ? (
+        <div class="flex flex-col items-center justify-center py-20 text-gray-500 bg-gray-50 rounded-lg shadow-inner">
+          <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 mb-4">
+            <span class="text-2xl">!</span>
+          </div>
+          <h2 class="text-2xl font-semibold mb-2">尚無作品</h2>
+          <p class="text-center max-w-md mb-8">
+            此設計師目前尚未有任何作品，請稍後再查看。
+          </p>
+          <a 
+            href="/projects" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-[#2bdcd2] text-white rounded-lg hover:bg-opacity-90 transition-colors"
+          >
+            瀏覽所有作品
+          </a>
+        </div>
+      ) : (
+        <>
+          <div class="mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h2 class="text-2xl font-semibold mb-4 border-l-4 border-[#2bdcd2] pl-4">設計師簡介</h2>
+            <p class="text-gray-600">
+              {designerName} 是我們工作室的專業設計師，擁有豐富的設計經驗和獨特的美學視角。以下是 {designerName} 參與設計的精選作品。
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+              posts.map((project) => (
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+                  <ProjectCard project={project} />
+                </div>
+              ))
+            }
+          </div>
+        </>
+      )}
+      
+      <div class="mt-12 text-center">
+        <a 
+          href="/projects" 
+          class="inline-flex items-center gap-2 px-6 py-3 border border-[#2bdcd2] text-[#2bdcd2] rounded-lg hover:bg-[#2bdcd2] hover:text-white transition-colors"
+        >
+          返回全部作品
+        </a>
       </div>
-    )}
+    </div>
   </section>
 </MainLayout>
+
+<style>
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.5s ease-out;
+  }
+</style>

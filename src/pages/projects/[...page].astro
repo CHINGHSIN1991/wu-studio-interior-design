@@ -12,7 +12,7 @@ export async function getStaticPaths({ paginate }: { paginate: any }) {
   });
 
   return paginate(allProjects, {
-    pageSize: 3,
+    pageSize: 6,
   })
 }
 
@@ -20,45 +20,102 @@ const { page } = Astro.props as any;
 
 ---
 
-<MainLayout title="Projects">
-  <section class="container mx-auto px-4 py-12" aria-label="Projects list">
-    <h1 class="text-4xl font-bold mb-8 text-center">Projects</h1>
-    
-    {
-      page.data.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-            page.data.map((project: Project) => (
-              <ProjectCard project={project}/>
-            ))
-          }
-        </div>
-      ) : (
-        <div class="flex flex-col items-center justify-center py-20 text-gray-500">
-          <h2 class="text-2xl font-semibold mb-2">No Projects Found</h2>
-          <p class="text-center max-w-md mb-8">
-            We haven't added any projects yet. Please check back later!
-          </p>
-          <a 
-            href="/" 
-            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
-          >
-            Back to Home
-          </a>
-        </div>
-      )
-    }
-
-    {page.data.length > 0 && (
-      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    )}
+<MainLayout title="案例作品">
+  <section 
+    class="container mx-auto px-4 py-16 animate-slide-in"
+    transition:animate="slide"
+    aria-label="專案列表"
+  >
+    <div class="max-w-6xl mx-auto">
+      <h1 
+        class="text-4xl md:text-5xl font-bold text-center mb-4"
+        transition:name="page-title"
+      >
+        Projects
+      </h1>
+      
+      <p class="text-center text-gray-500 mb-16 max-w-2xl mx-auto">
+        我們的專業設計作品集，涵蓋住宅、商業與辦公空間的精選案例。
+      </p>
+      
+      {
+        page.data.length > 0 ? (
+          <>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              {
+                page.data.map((project: Project) => (
+                  <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+                    <ProjectCard project={project}/>
+                  </div>
+                ))
+              }
+            </div>
+            
+            <div class="my-12">
+              <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+            </div>
+          </>
+        ) : (
+          <div class="flex flex-col items-center justify-center py-20 text-gray-500 bg-gray-50 rounded-lg shadow-inner">
+            <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 mb-4">
+              <span class="text-2xl">!</span>
+            </div>
+            <h2 class="text-2xl font-semibold mb-2">尚無專案</h2>
+            <p class="text-center max-w-md mb-8">
+              目前尚未有任何專案作品，請稍後再查看。
+            </p>
+            <a 
+              href="/" 
+              class="inline-flex items-center gap-2 px-6 py-3 bg-[#2bdcd2] text-white rounded-lg hover:bg-opacity-90 transition-colors"
+            >
+              返回首頁
+            </a>
+          </div>
+        )
+      }
+    </div>
   </section>
-  <aside class="container" aria-label="Blog categories">
-    <h2>Blog Categories</h2>
-    <CategoryCloud showCount />
-  </aside>
+  
+  {page.data.length > 0 && (
+    <aside 
+      class="container mx-auto px-4 pb-16 max-w-6xl" 
+      aria-label="專案分類"
+      transition:animate="fade"
+    >
+      <div class="bg-gray-50 rounded-lg p-8 shadow-inner">
+        <h2 class="text-2xl font-semibold mb-6 border-l-4 border-[#2bdcd2] pl-4">專案分類</h2>
+        <CategoryCloud showCount />
+      </div>
+    </aside>
+  )}
 </MainLayout>
 
 <style>
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.5s ease-out;
+  }
+
+  [transition\:animate="fade"] {
+    animation: fade-in 0.5s ease-out;
+  }
 </style>

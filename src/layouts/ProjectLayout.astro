@@ -35,20 +35,6 @@ const relatedPosts = allProjects.filter(
   />
   <div class="project-content">
     <div class="content">
-      {
-        images?.map((url: string) => (<Image
-          src={url}
-          alt={title}
-          width="400"
-          height="600"
-          format="avif"
-          loading="lazy"
-          fit="cover"
-          quality={80}
-        />))
-      }
-    </div>
-    <div class="content">
       <slot />
     </div>
     <div class="sidebar">
