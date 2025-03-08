@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { slugify } from '../ts/utils'
 import type { CarouselItem } from '../../types'
 
 interface CarouselProps {
@@ -56,7 +57,7 @@ const Carousel = ({ items }: CarouselProps) => {
             }`}
           >
             {item.data.link ? (
-              <a href={`projects/${item.data.link}`}>
+              <a href={`projects/${slugify(item.data.title)}`}>
                 <img
                   src={item.data.url}
                   alt={item.data.title}

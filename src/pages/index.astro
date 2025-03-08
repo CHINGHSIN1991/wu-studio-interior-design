@@ -1,17 +1,25 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import Carousel from '../components/Carousel';
+// import Carousel from '../components/Carousel';
+import InfiniteMenu from '../components/InfiniteMenu';
 import { getCollection } from 'astro:content';
+import { slugify } from '../ts/utils';
 
 const carouselItems = await getCollection('carousel', ({ data }) => {
   return data.active && !data.draft;
 });
 
 const sortedItems = carouselItems.sort((a, b) => a.data.order - b.data.order);
+const testItems = sortedItems.map((item) => ({
+  image: item.data.url,
+  link: slugify(item.data.title ?? '#'),
+  title: item.data.title,
+  description: item.data.description
+}));
 ---
 
 <MainLayout>
-  <Carousel client:load items={sortedItems} />
+  <InfiniteMenu client:load items={testItems} />
 </MainLayout>
 
 <style>

@@ -23,7 +23,7 @@ const { project } = Astro.props
     <h3 class="my-1 py-2 text-2xl font-bold">{project.data.title}</h3>
     <p>by {project.data.designers.map((designer: string) => (
       <a href={`/designer/${slugify(designer)}`}>{designer}</a>
-    ))} · {formatDate(project.data?.date)}</p>
+    ))} · {formatDate(project.data?.completionDate)}</p>
   </a>
   <Link href={project.data.url} text="Read more ..." style="secondary"/>
 </article>
