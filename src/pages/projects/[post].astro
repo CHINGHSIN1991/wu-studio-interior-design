@@ -1,12 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
-import { Image } from 'astro:assets';
+import { slugify } from '../../ts/utils';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
   return allProjects.map(project => ({
-    params: { post: project.data.title },
+    params: { post: slugify(project.data.title) },
     props: { project }
   }));
 }
@@ -80,7 +80,6 @@ if (!project) {
         </p>
       </div>
       
-      <!-- 封面圖 -->
       <div class="mb-12">
         <img 
           src={project.data.cover} 
@@ -89,7 +88,6 @@ if (!project) {
         />
       </div>
       
-      <!-- 專案圖片集 -->
       {project.data.images && project.data.images.length > 0 && (
         <div class="mb-12">
           <h2 class="text-2xl font-semibold mb-6 border-l-4 border-[#2bdcd2] pl-4">
@@ -109,7 +107,6 @@ if (!project) {
         </div>
       )}
       
-      <!-- 回到專案列表 -->
       <div class="mt-12 text-center">
         <a 
           href="/projects" 
