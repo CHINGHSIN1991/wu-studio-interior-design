@@ -1,0 +1,20 @@
+{
+  "draft": false,
+  "designers": [
+    "ChingHsinChen"
+  ],
+  "photographer": [
+    "ChingHsinChen",
+    "ssss"
+  ],
+  "completionDate": "2025-03-21",
+  "location": "ChingPu",
+  "cover": "/assets/images/download.jpeg",
+  "title": "AAAA",
+  "images": [
+    "/assets/images/fallback-img.png",
+    "/assets/images/headshot.jpg"
+  ],
+  "description": "description description-description description sss dsds",
+  "category": "Commercial Design"
+}
