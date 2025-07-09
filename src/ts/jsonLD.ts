@@ -8,33 +8,32 @@ interface PostParam {
 }
 
 export default function jsonLDGenerator({ type, post, url }: PostParam) {
+  let obj: Record<string, any>;
   if (type === 'post') {
-    return `<script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "${url}"
-        },
-        "headline": "${post.title}",
-        "description": "${post.description}",
-        "cover": "${post.cover.src}",
-        "designer": {
-          "@type": "Person",
-          "name": "${post.designers[0]}",
-          "url": "/designer/${slugify(post.designers[0])}"
-        },
-        "datePublished": "${post.date}"
-      }
-    </script>`;
+    obj = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': url,
+      },
+      headline: post.title,
+      description: post.description,
+      cover: post.cover.src,
+      designer: {
+        '@type': 'Person',
+        name: post.designers[0],
+        url: `/designer/${slugify(post.designers[0])}`,
+      },
+      datePublished: post.date,
+    };
+  } else {
+    obj = {
+      '@context': 'https://schema.org/',
+      '@type': 'WebSite',
+      name: siteData.title,
+      url: import.meta.env.SITE,
+    };
   }
-  return `<script type="application/ld+json">
-      {
-      "@context": "https://schema.org/",
-      "@type": "WebSite",
-      "name": "${siteData.title}",
-      "url": "${import.meta.env.SITE}"
-      }
-    </script>`;
-}
+
+  return `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;}
